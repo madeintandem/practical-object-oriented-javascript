@@ -123,7 +123,16 @@ Building An Autocomplete Widget
 
 When creating object-oriented widgets in JavaScript requires breaking down the desired functionality down into seperate object. We can think of an autocomplete widget as a collection of several objects. It helps to identify each object by visualizing the widget:
 
-![Autocomplete Diagram](https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/autocomplete-diagram.png) 
+![Autocomplete Diagram](https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/autocomplete-diagram.png)
+
+ * **Autocomplete** handles coordinating the objects
+ * **Input** handles accepting text input and determining whether to handle text entry or commands
+ * **List** handles showing, hiding, activating, and selecting list items
+ * **List Item** handles interaction with the item
+
+The benefits of this type of architecture is that it is easy to test, easy to extend and does not require traversing or reading the DOM. This helps hedge against unforseen errors when things in the markup change.
+
+
 
 *Notes:*
 *Inheritance in js is prototypal, and we're not going to get super deep into it*
