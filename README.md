@@ -34,42 +34,42 @@ _____________________
 
  * Functions can be dynamically created by other functions
 
-### [Function Assignment](https://gist.github.com/daytonn/2d0bdbaa9621d3aad207.js)
+### [Function Assignment](https://gist.github.com/daytonn/2d0bdbaa9621d3aad207)
 <script src="https://gist.github.com/daytonn/2d0bdbaa9621d3aad207.js"></script>
 
-### [Dynamic Function Assignment](https://gist.github.com/daytonn/bce92d21e36b71482722.js)
+### [Dynamic Function Assignment](https://gist.github.com/daytonn/bce92d21e36b71482722)
 <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
 
-### [Closure](https://gist.github.com/daytonn/ec5326a6e73685da6747.js)
+### [Closure](https://gist.github.com/daytonn/ec5326a6e73685da6747)
 <script src="https://gist.github.com/daytonn/ec5326a6e73685da6747.js"></script>
 
-### [Global this](https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f.js)
+### [Global this](https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f)
 <script src="https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f.js"></script>
 
-### [Leaked globals](https://gist.github.com/daytonn/58b3b16151ed175d90ea.js)
+### [Leaked globals](https://gist.github.com/daytonn/58b3b16151ed175d90ea)
 <script src="https://gist.github.com/daytonn/58b3b16151ed175d90ea.js"></script>
 
-### [This in nested closures](https://gist.github.com/crismali/c6adf7cb6d91f266741f.js)
+### [This in nested closures](https://gist.github.com/crismali/c6adf7cb6d91f266741f)
 <script src="https://gist.github.com/crismali/c6adf7cb6d91f266741f.js"></script>
 
-### [This in a method](https://gist.github.com/crismali/08e53b8a740f514d77f6.js)
+### [This in a method](https://gist.github.com/crismali/08e53b8a740f514d77f6)
 <script src="https://gist.github.com/crismali/08e53b8a740f514d77f6.js"></script>
 
-### [Functions with no containing object](https://gist.github.com/crismali/247affaee419099e5583.js)
+### [Functions with no containing object](https://gist.github.com/crismali/247affaee419099e5583)
 <script src="https://gist.github.com/crismali/247affaee419099e5583.js"></script>
 
-### [Call and Apply to force this](https://gist.github.com/crismali/999e91bf1d8a1e87a105.js)
+### [Call and Apply to force this](https://gist.github.com/crismali/999e91bf1d8a1e87a105)
 <script src="https://gist.github.com/crismali/999e91bf1d8a1e87a105.js"></script>
 
-### [Call and Apply](https://gist.github.com/crismali/f05faffb2b701bb1ff4f.js)
+### [Call and Apply](https://gist.github.com/crismali/f05faffb2b701bb1ff4f)
 <script src="https://gist.github.com/crismali/f05faffb2b701bb1ff4f.js"></script>
 
-### [Binding with apply](https://gist.github.com/crismali/6563184aa061fab0e053.js)
+### [Binding with apply](https://gist.github.com/crismali/6563184aa061fab0e053)
 <script src="https://gist.github.com/crismali/6563184aa061fab0e053.js"></script>
 
-### [Native bind](https://gist.github.com/crismali/35fa19c388cf76aa4789.js)
+### [Native bind](https://gist.github.com/crismali/35fa19c388cf76aa4789)
 <script src="https://gist.github.com/crismali/35fa19c388cf76aa4789.js"></script>
 
-### [Binding with Lodash](https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js)
+### [Binding with Lodash](https://gist.github.com/crismali/a7aaff8a591cf90e34d6)
 <script src="https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js"></script>
 
