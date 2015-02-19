@@ -34,6 +34,10 @@ _____________________
 
  * Functions can be dynamically created by other functions
 
+Function Assignment
+<script src="https://gist.github.com/daytonn/2d0bdbaa9621d3aad207.js"></script>
+
+Dynamic Function Assignment
  <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
  
  Native bind
