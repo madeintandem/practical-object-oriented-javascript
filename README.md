@@ -34,15 +34,11 @@ _____________________
 
  * Functions can be dynamically created by other functions
 
-### Function Assignments
-
-<script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
+ <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
  
-### Function Properties
-
-<script src="https://gist.github.com/daytonn/6c141c6620f442ecde50.js"></script>
-
-###Binding with Lodash
-
-<script src="https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js"></script>
+ Native bind
+ <script src="https://gist.github.com/crismali/35fa19c388cf76aa4789.js"></script>
+ 
+ Binding with Lodash
+ <script src="https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js"></script>
  
