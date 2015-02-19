@@ -34,42 +34,42 @@ _____________________
 
  * Functions can be dynamically created by other functions
 
-### Function Assignment
+### [Function Assignment](https://gist.github.com/daytonn/2d0bdbaa9621d3aad207.js)
 <script src="https://gist.github.com/daytonn/2d0bdbaa9621d3aad207.js"></script>
 
-### Dynamic Function Assignment
+### [Dynamic Function Assignment](https://gist.github.com/daytonn/bce92d21e36b71482722.js)
 <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
 
-### Closure
+### [Closure](https://gist.github.com/daytonn/ec5326a6e73685da6747.js)
 <script src="https://gist.github.com/daytonn/ec5326a6e73685da6747.js"></script>
 
-### Global this
+### [Global this](https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f.js)
 <script src="https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f.js"></script>
 
-### Leaked globals
+### [Leaked globals](https://gist.github.com/daytonn/58b3b16151ed175d90ea.js)
 <script src="https://gist.github.com/daytonn/58b3b16151ed175d90ea.js"></script>
 
-### This in nested closures
+### [This in nested closures](https://gist.github.com/crismali/c6adf7cb6d91f266741f.js)
 <script src="https://gist.github.com/crismali/c6adf7cb6d91f266741f.js"></script>
 
-### This in a method
+### [This in a method](https://gist.github.com/crismali/08e53b8a740f514d77f6.js)
 <script src="https://gist.github.com/crismali/08e53b8a740f514d77f6.js"></script>
 
-### Functions with no containing object
+### [Functions with no containing object](https://gist.github.com/crismali/247affaee419099e5583.js)
 <script src="https://gist.github.com/crismali/247affaee419099e5583.js"></script>
 
-### Call and Apply to force this
+### [Call and Apply to force this](https://gist.github.com/crismali/999e91bf1d8a1e87a105.js)
 <script src="https://gist.github.com/crismali/999e91bf1d8a1e87a105.js"></script>
 
-### Call and Apply
+### [Call and Apply](https://gist.github.com/crismali/f05faffb2b701bb1ff4f.js)
 <script src="https://gist.github.com/crismali/f05faffb2b701bb1ff4f.js"></script>
- 
-### Binding with apply
+
+### [Binding with apply](https://gist.github.com/crismali/6563184aa061fab0e053.js)
 <script src="https://gist.github.com/crismali/6563184aa061fab0e053.js"></script>
- 
-### Native bind
+
+### [Native bind](https://gist.github.com/crismali/35fa19c388cf76aa4789.js)
 <script src="https://gist.github.com/crismali/35fa19c388cf76aa4789.js"></script>
- 
-### Binding with Lodash
+
+### [Binding with Lodash](https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js)
 <script src="https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js"></script>
- 
+
