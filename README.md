@@ -32,7 +32,7 @@ First Class Functions
 [Dynamic Function Assignment](https://gist.github.com/daytonn/bce92d21e36b71482722)
 <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
 
-![Obligatory Mind Blown .gif](http://i.imgur.com/YGsTG5o.gif)
+![Obligatory Mind Blown .gif](https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/mind-blown.gif)
 
 Scope
 -----
@@ -116,12 +116,14 @@ Most modern browsers support binding functions natively with the [bind method](h
 
 Lodash and other libraries provide context binding for browsers that don't support binding: [binding with libraries](https://gist.github.com/crismali/a7aaff8a591cf90e34d6)
 
-![Obligatory Mind Blown .gif](http://i.imgur.com/YGsTG5o.gif)
+![Obligatory Mind Blown .gif](https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/mind-blown.gif)
 
 Building An Autocomplete Widget
 -------------------------------
 
+When creating object-oriented widgets in JavaScript requires breaking down the desired functionality down into seperate object. We can think of an autocomplete widget as a collection of several objects. It helps to identify each object by visualizing the widget:
 
+![Autocomplete Diagram](https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/autocomplete-diagram.png) 
 
 *Notes:*
 *Inheritance in js is prototypal, and we're not going to get super deep into it*
