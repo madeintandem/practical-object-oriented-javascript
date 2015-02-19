@@ -36,4 +36,6 @@ _____________________
 
  <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
  
+ Binding with Lodash
+ <script src="https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js"></script>
  
