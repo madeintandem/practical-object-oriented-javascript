@@ -49,6 +49,18 @@ _____________________
 ### Leaked globals
 <script src="https://gist.github.com/daytonn/58b3b16151ed175d90ea.js"></script>
 
+### This in nested closures
+<script src="https://gist.github.com/crismali/c6adf7cb6d91f266741f.js"></script>
+
+### This in a method
+<script src="https://gist.github.com/crismali/08e53b8a740f514d77f6.js"></script>
+
+### Functions with no containing object
+<script src="https://gist.github.com/crismali/247affaee419099e5583.js"></script>
+
+### Call and Apply to force this
+<script src="https://gist.github.com/crismali/999e91bf1d8a1e87a105.js"></script>
+
 ### Call and Apply
 <script src="https://gist.github.com/crismali/f05faffb2b701bb1ff4f.js"></script>
  
