@@ -34,4 +34,4 @@ _____________________
 
  * Functions can be dynamically created by other functions
 
- <a class="jsbin-embed" href="http://jsbin.com/negali/1/embed?js,console">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+ <script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
