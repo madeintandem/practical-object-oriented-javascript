@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/js/vendor/lodash.min.js"></script>
+    <script src="support/expect.min.js"></script>
+    <script src="support/mocha.min.js"></script>
+    <script src="support/chai.js"></script>
+    <script src="support/sinon-min.js"></script>
+    <script src="support/chai-jquery.js"></script>
+    <script src="support/sinon-chai.js"></script>
+
+    <script>
+      mocha.setup("bdd");
+    </script>
+
+    <script src="support/spec_helper.js"></script>
+    <script src="autocomplete_input_spec.js"></script>
+
+    <script>
+      mocha.checkLeaks();
+      mocha.globals(["jQuery"]);
+      mocha.run();
+    </script>
+  </body>
+</html>
