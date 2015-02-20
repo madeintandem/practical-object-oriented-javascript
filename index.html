@@ -37,104 +37,1936 @@
 <a id="what-we-will-cover" class="anchor" href="#what-we-will-cover" aria-hidden="true"><span class="octicon octicon-link"></span></a>What We Will Cover</h2>
 
 <ul>
-<li><p>JavaScript primer, is it functional? is it object oriented? is it funcject orientional?</p></li>
-<li><p>First class functions</p></li>
-<li><p>Closures</p></li>
-<li><p>WTF is this?</p></li>
-<li><p>Why is this that?</p></li>
-<li><p>Seriously WTF is this and how do I force it to make sense</p></li>
-<li><p>Managing scope</p></li>
-<li><p>Building an autocomplete widget with the JS OO building blocks</p></li>
+<li>JavaScript primer, is it functional? is it object oriented? is it funcject orientional?</li>
+<li>First class functions</li>
+<li>Closures</li>
+<li>WTF is <code>this</code>?</li>
+<li>Why is <code>this</code> that?</li>
+<li>Seriously WTF is <code>this</code> and how do I force it to make sense</li>
+<li>Managing scope</li>
+<li>Building an autocomplete widget with the OO building blocks</li>
 </ul>
 
-<p>First Class Functions</p>
-
-<hr>
+<h2>
+<a id="first-class-functions" class="anchor" href="#first-class-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>First Class Functions</h2>
 
 <ul>
-<li><p>Functions are values just like strings, numbers, arrays, and objects</p></li>
-<li><p>Functions can be assigned to variables and passed as arguments</p></li>
-<li><p>Functions can be manipulated as values</p></li>
-<li><p>Functions can be dynamically created by other functions</p></li>
+<li>Functions are values just like strings, numbers, arrays, and objects</li>
+<li>Functions can be assigned to variables and passed as arguments</li>
+<li>Functions can be manipulated as values</li>
+<li>Functions can be dynamically created by other functions</li>
 </ul>
 
-<h3>
-<a id="function-assignment" class="anchor" href="#function-assignment" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/daytonn/2d0bdbaa9621d3aad207">Function Assignment</a>
-</h3>
-<script src="https://gist.github.com/daytonn/2d0bdbaa9621d3aad207.js"></script>
+<p>Function Assignment</p>
 
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> <span class="pl-en">greeterCreator</span> <span class="pl-k">=</span> <span class="pl-st">function</span>(<span class="pl-vpf">greeting</span>) {
+    <span class="pl-k">return</span> <span class="pl-st">function</span>(<span class="pl-vpf">name</span>) {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(greeting <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> <span class="pl-k">+</span> name);
+    };
+};
 
-<h3>
-<a id="dynamic-function-assignment" class="anchor" href="#dynamic-function-assignment" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/daytonn/bce92d21e36b71482722">Dynamic Function Assignment</a>
-</h3>
-<script src="https://gist.github.com/daytonn/bce92d21e36b71482722.js"></script>
+<span class="pl-s">var</span> helloGreeter <span class="pl-k">=</span> greeterCreator(<span class="pl-s1"><span class="pl-pds">"</span>Hello<span class="pl-pds">"</span></span>);
 
+helloGreeter(<span class="pl-s1"><span class="pl-pds">"</span>Chicago Web Conf<span class="pl-pds">"</span></span>);</pre></div>
 
-<h3>
-<a id="closure" class="anchor" href="#closure" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/daytonn/ec5326a6e73685da6747">Closure</a>
-</h3>
-<script src="https://gist.github.com/daytonn/ec5326a6e73685da6747.js"></script>
+<p>Dynamic Function Assignment</p>
 
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> <span class="pl-en">myFunction</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>);
+};
 
-<h3>
-<a id="global-this" class="anchor" href="#global-this" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f">Global this</a>
-</h3>
-<script src="https://gist.github.com/daytonn/1a7ed7cbfc8929e7225f.js"></script>
+<span class="pl-s">var</span> myObject <span class="pl-k">=</span> {
+  <span class="pl-en">myMethod</span>: <span class="pl-st">function</span>() {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>I'm a property of an object<span class="pl-pds">"</span></span>);
+  }
+};
 
+myFunction();
+myObject.myMethod();</pre></div>
 
-<h3>
-<a id="leaked-globals" class="anchor" href="#leaked-globals" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/daytonn/58b3b16151ed175d90ea">Leaked globals</a>
-</h3>
-<script src="https://gist.github.com/daytonn/58b3b16151ed175d90ea.js"></script>
+<p><img src="https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/mind-blown.gif" alt="Obligatory Mind Blown .gif"></p>
 
+<h2>
+<a id="scope" class="anchor" href="#scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scope</h2>
 
-<h3>
-<a id="this-in-nested-closures" class="anchor" href="#this-in-nested-closures" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/c6adf7cb6d91f266741f">This in nested closures</a>
-</h3>
-<script src="https://gist.github.com/crismali/c6adf7cb6d91f266741f.js"></script>
+<p><code>window</code> is the implicit global namespace. Leaked globals can be accessed on window.</p>
 
+<p>Global variables are implied when assigned without the <code>var</code> keyword. Basically, you should <strong>NEVER</strong> assign a variable without the <code>var</code> keyword. It is otherwise very easy to leak a function's member variable to the global scope:</p>
 
-<h3>
-<a id="this-in-a-method" class="anchor" href="#this-in-a-method" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/08e53b8a740f514d77f6">This in a method</a>
-</h3>
-<script src="https://gist.github.com/crismali/08e53b8a740f514d77f6.js"></script>
+<p>Leaked globals</p>
 
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> foo <span class="pl-k">=</span> <span class="pl-c1">5</span>;
+<span class="pl-s">var</span> bar <span class="pl-k">=</span> <span class="pl-c1">10</span>;
 
-<h3>
-<a id="functions-with-no-containing-object" class="anchor" href="#functions-with-no-containing-object" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/247affaee419099e5583">Functions with no containing object</a>
-</h3>
-<script src="https://gist.github.com/crismali/247affaee419099e5583.js"></script>
+<span class="pl-st">function</span> <span class="pl-en">logFoo</span>() {
+  foo <span class="pl-k">=</span> <span class="pl-c1">15</span>;
+  <span class="pl-s">var</span> bar <span class="pl-k">=</span> <span class="pl-c1">20</span>;
 
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>logFoo scope<span class="pl-pds">"</span></span>)
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(foo, bar);
+}
 
-<h3>
-<a id="call-and-apply-to-force-this" class="anchor" href="#call-and-apply-to-force-this" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/999e91bf1d8a1e87a105">Call and Apply to force this</a>
-</h3>
-<script src="https://gist.github.com/crismali/999e91bf1d8a1e87a105.js"></script>
+logFoo(); <span class="pl-c">// 15, 20</span>
 
-
-<h3>
-<a id="call-and-apply" class="anchor" href="#call-and-apply" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/f05faffb2b701bb1ff4f">Call and Apply</a>
-</h3>
-<script src="https://gist.github.com/crismali/f05faffb2b701bb1ff4f.js"></script>
-
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>global scope (window)<span class="pl-pds">"</span></span>)
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(foo, bar); <span class="pl-c">// 15, 10</span>
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s3">window</span>.foo, <span class="pl-s3">window</span>.bar); <span class="pl-c">// 15, 10</span></pre></div>
 
 <h3>
-<a id="binding-with-apply" class="anchor" href="#binding-with-apply" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/6563184aa061fab0e053">Binding with apply</a>
-</h3>
-<script src="https://gist.github.com/crismali/6563184aa061fab0e053.js"></script>
+<a id="closures" class="anchor" href="#closures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Closures</h3>
 
+<p>Closures are an immediately invoked function, which usually return a function that has access to privately scoped members of the containing function. The outer function “closes over” the returned function, hence the term closure. The only way to create private methods/variables in JavaScript is to use a closure (for now).</p>
+
+<h4>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>examples:</h4>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> <span class="pl-en">tellSecrets</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> secret <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>shh, don’t tell anyone<span class="pl-pds">"</span></span>;
+  <span class="pl-k">return</span> <span class="pl-st">function</span>() {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(secret);
+  };
+}();
+
+tellSecrets();
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(secret); <span class="pl-c">// undefined</span></pre></div>
+
+<h2>
+<a id="objects" class="anchor" href="#objects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objects</h2>
+
+<p>When we talk about Objects in JavaScript, we can be talking about 2 different things. The <code>Object</code> data type refers to a key-value pair; much like hashes, associative arrays, or maps in other languages. They are also refered to as JSON (javascript object notation) objects. Here are a few examples of simple JavaScript objects:</p>
+
+<h4>
+<a id="examples-1" class="anchor" href="#examples-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>examples:</h4>
+
+<p>A basic object is a simple key-value store that can be arbitrarily nested:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> person <span class="pl-k">=</span> {
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ject<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">33</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>123 Memory Ln<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff9575c05f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Browser Town<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Mozilla<span class="pl-pds">"</span></span>
+  }
+};</pre></div>
+
+<p>An object can have functions for properties (remember first class functions). When the property of an object is a function, we refer to these as methods:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> person <span class="pl-k">=</span> {
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ject<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">33</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>123 Memory Ln<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff9575c05f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Browser Town<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Mozilla<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-en">sayHello</span>: <span class="pl-st">function</span>() {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>Hi, my name is <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.firstName <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>. I live in <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.city <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>, on <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.street <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>)
+  }
+};</pre></div>
 
 <h3>
-<a id="native-bind" class="anchor" href="#native-bind" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/35fa19c388cf76aa4789">Native bind</a>
-</h3>
-<script src="https://gist.github.com/crismali/35fa19c388cf76aa4789.js"></script>
+<a id="instantiated-objects" class="anchor" href="#instantiated-objects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instantiated Objects</h3>
 
+<p>When we talk about objects in traditional object-oriented programming, we are talking about classes and instances. JavaScript <em>does not have</em> a traditional Class model. In fact, it does not have a "Class" at all (until recently). "Classes" in JavaScript are created by taking advantage of some interesting features of functions in JavaScript. The <code>new</code> keyword and the <code>this</code> keyword allow us to mimic the functionality of traditional Classes and inheritance patterns.</p>
+
+<p>To create a "Class" in javascript, you must first define a function. Since there are no formal "Classes", always capitalize a function intended to be used as a "Class". This function is considered the <code>constructor</code>, which means this function will be executed every time a new instance of this "Class" is created, with a new context. "Instance variables" for each instance of the object can be assinged by using the <code>this</code> keyword. These are really just properties of the instantiated object.</p>
+
+<h4>
+<a id="examples-2" class="anchor" href="#examples-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>examples:</h4>
+
+<p>To instantiate a new instance of a "Class" use the <code>new</code> keyword:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">Person</span>(<span class="pl-vpf">attributes</span>) {
+  <span class="pl-v">this</span>.firstName <span class="pl-k">=</span> attributes.firstName;
+  <span class="pl-v">this</span>.lastName <span class="pl-k">=</span> attributes.lastName;
+  <span class="pl-v">this</span>.age <span class="pl-k">=</span> attributes.age;
+  <span class="pl-v">this</span>.address <span class="pl-k">=</span> attributes.address;
+}
+
+<span class="pl-s">var</span> bob <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Person</span>({
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ject<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">33</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>123 Memory Ln<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff9575c05f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Browser Town<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Mozilla<span class="pl-pds">"</span></span>
+  }
+);</pre></div>
+
+<p><em>Warning if you do not use the <code>new</code> keyword when you instantiate a new object, the function will still be executed, returning undefined and leaking any properties assigned to the global scope</em>:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">Person</span>(<span class="pl-vpf">attributes</span>) {
+  <span class="pl-v">this</span>.firstName <span class="pl-k">=</span> attributes.firstName;
+  <span class="pl-v">this</span>.lastName <span class="pl-k">=</span> attributes.lastName;
+  <span class="pl-v">this</span>.age <span class="pl-k">=</span> attributes.age;
+  <span class="pl-v">this</span>.address <span class="pl-k">=</span> attributes.address;
+}
+
+<span class="pl-s">var</span> bob <span class="pl-k">=</span> Person({
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ject<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">33</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>123 Memory Ln<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff9575c05f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Browser Town<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Mozilla<span class="pl-pds">"</span></span>
+  }
+);
+
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(bob); <span class="pl-c">// undefined</span>
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s3">window</span>.firstName); <span class="pl-c">// "Bob"</span>
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s3">window</span>.lastName); <span class="pl-c">// "Ject"</span>
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s3">window</span>.age); <span class="pl-c">// 33</span>
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s3">window</span>.address); <span class="pl-c">// [object Object] (address object)</span></pre></div>
 
 <h3>
-<a id="binding-with-lodash" class="anchor" href="#binding-with-lodash" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://gist.github.com/crismali/a7aaff8a591cf90e34d6">Binding with Lodash</a>
-</h3>
-<script src="https://gist.github.com/crismali/a7aaff8a591cf90e34d6.js"></script>
+<a id="instance-methods" class="anchor" href="#instance-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instance Methods</h3>
 
+<p>To define instance methods the right way, we assign functions to the "Class" <code>prototype</code>. The <code>prototype</code> is an <code>Object</code> (the JSON kind) that contains the methods that each instance will share. Every instance can share these same methods because when called, they will be called in the context of that instance:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">Person</span>(<span class="pl-vpf">attributes</span>) {
+  <span class="pl-v">this</span>.firstName <span class="pl-k">=</span> attributes.firstName;
+  <span class="pl-v">this</span>.lastName <span class="pl-k">=</span> attributes.lastName;
+  <span class="pl-v">this</span>.age <span class="pl-k">=</span> attributes.age;
+  <span class="pl-v">this</span>.address <span class="pl-k">=</span> attributes.address;
+}
+
+<span class="pl-s3">Person</span>.<span class="pl-sc">prototype</span>.<span class="pl-en">sayHello</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>Hi, my name is <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.firstName <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>. I live in <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.city <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>, <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.state <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span> on <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.street <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>);
+};
+
+<span class="pl-s">var</span> bob <span class="pl-k">=</span> Person({
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ject<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">33</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>123 Memory Ln<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff9575c05f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Browser Town<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Mozilla<span class="pl-pds">"</span></span>
+  }
+);
+
+<span class="pl-s">var</span> ella <span class="pl-k">=</span> Person({
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ella<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Siff<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">1</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>8362 Ram Rd<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff8637c02f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>10101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Tab City<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Webkitesota<span class="pl-pds">"</span></span>
+  }
+);
+
+bob.sayHello(); <span class="pl-c">// "Hi, my name is Bob. I live in Browser Town, Mozilla on 123 Memory Ln."</span>
+ella.sayHello(); <span class="pl-c">// "Hi, my name is Ella. I live in Tab City, Webkitesota on 8362 Ram Rd."</span></pre></div>
+
+<p>There is a naive way to define instance methods which has an impact on performace. DO NOT define instance methods as <code>this</code> properties in a "Class" <code>constructor</code>. This will create a new function in memory for each instance, which is expensive and unnecessary.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">// DO NOT define instance methods in this way</span>
+
+<span class="pl-st">function</span> <span class="pl-en">Person</span>(<span class="pl-vpf">attributes</span>) {
+  <span class="pl-v">this</span>.firstName <span class="pl-k">=</span> attributes.firstName;
+  <span class="pl-v">this</span>.lastName <span class="pl-k">=</span> attributes.lastName;
+  <span class="pl-v">this</span>.age <span class="pl-k">=</span> attributes.age;
+  <span class="pl-v">this</span>.address <span class="pl-k">=</span> attributes.address;
+  <span class="pl-s3">this</span>.<span class="pl-en">sayHello</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>Hi, my name is <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.firstName <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>. I live in <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.city <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>, on <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.street <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>)
+  };
+}</pre></div>
+
+<h3>
+<a id="static-or-class-methods" class="anchor" href="#static-or-class-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Static or Class Methods</h3>
+
+<p>Sometimes, methods should not belong to any specific instance and instead belong to the "Class" itself. Traditionally we call these static or class methods. Since a "Class" in JavaScript is simply a function and functions are first-class and can have properties, we simply define a property on the "Class" function itself:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">Person</span>(<span class="pl-vpf">attributes</span>) {
+  <span class="pl-v">this</span>.firstName <span class="pl-k">=</span> attributes.firstName;
+  <span class="pl-v">this</span>.lastName <span class="pl-k">=</span> attributes.lastName;
+  <span class="pl-v">this</span>.age <span class="pl-k">=</span> attributes.age;
+  <span class="pl-v">this</span>.address <span class="pl-k">=</span> attributes.address;
+}
+
+<span class="pl-s3">Person</span>.<span class="pl-en">marry</span> <span class="pl-k">=</span> <span class="pl-st">function</span>(<span class="pl-vpf">bride</span>, <span class="pl-vpf">groom</span>) {
+  bride.spouse <span class="pl-k">=</span> groom;
+  groom.spouse <span class="pl-k">=</span> bride;
+}
+
+<span class="pl-s3">Person</span>.<span class="pl-sc">prototype</span>.<span class="pl-en">sayHello</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">"</span>Hi, my name is <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.firstName <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>. I live in <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.city <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>, <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.state <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span> on <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.address.street <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>);
+};
+
+<span class="pl-s">var</span> bob <span class="pl-k">=</span> Person({
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ject<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">33</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>123 Memory Ln<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff9575c05f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>01101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Browser Town<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Mozilla<span class="pl-pds">"</span></span>
+  }
+);
+
+<span class="pl-s">var</span> ella <span class="pl-k">=</span> Person({
+  firstName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Ella<span class="pl-pds">"</span></span>,
+  lastName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Siff<span class="pl-pds">"</span></span>,
+  age<span class="pl-k">:</span> <span class="pl-c1">1</span>,
+  address<span class="pl-k">:</span> {
+    street<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>8362 Ram Rd<span class="pl-pds">"</span></span>,
+    apt<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0x7fff8637c02f<span class="pl-pds">"</span></span>,
+    zip<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>10101<span class="pl-pds">"</span></span>,
+    city<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Tab City<span class="pl-pds">"</span></span>,
+    state<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Webkitesota<span class="pl-pds">"</span></span>
+  }
+);
+
+Person.marry(ella, bob);
+
+bob.spouse <span class="pl-k">===</span> ella; <span class="pl-c">// true</span>
+ella.spouse <span class="pl-k">===</span> bob; <span class="pl-c">// true</span></pre></div>
+
+<h2>
+<a id="thissues" class="anchor" href="#thissues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Thissues™</h2>
+
+<p><code>this</code> is a reference to the current context (object). The current context (object) is is not always what you expect. It can change what it references when a function is passed to other objects.Without a containing object, <code>this</code> refers to the global scope (window). Understanding <code>this</code> is crucial to writing solid object oriented JavaScript and will punish those who don’t understand it.</p>
+
+<h4>
+<a id="examples-3" class="anchor" href="#examples-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>examples:</h4>
+
+<p>When there is no other containing scope <code>this</code> is <code>window</code>:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">someFunction</span>() {
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>);
+}
+
+someFunction(); <span class="pl-c">// window</span></pre></div>
+
+<p>In nested anonymous functions <code>this</code> is still <code>window</code>:</p>
+
+<div class="highlight highlight-js"><pre>(<span class="pl-st">function</span>() {
+    <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>); <span class="pl-c">// logs window</span>
+
+    (<span class="pl-st">function</span>() {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>); <span class="pl-c">// logs window</span>
+    })();
+
+})();</pre></div>
+
+<p>In an Object: <code>this</code> refers to the containing object:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> object <span class="pl-k">=</span> {
+    <span class="pl-en">someMethod</span>: <span class="pl-st">function</span>() {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>)
+    }
+};
+
+object.someMethod(); <span class="pl-c">// logs object</span>
+object[<span class="pl-s1"><span class="pl-pds">"</span>someMethod<span class="pl-pds">"</span></span>](); <span class="pl-c">// logs object</span></pre></div>
+
+<p>When functions change scope: <code>this</code> becomes the new scope:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> object <span class="pl-k">=</span> {
+    <span class="pl-en">someMethod</span>: <span class="pl-st">function</span>() {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>)
+    }
+};
+
+<span class="pl-s">var</span> someMethod <span class="pl-k">=</span> object.someMethod;
+someMethod(); <span class="pl-c">// logs window</span></pre></div>
+
+<p>You can force a function to use a give context use call or apply and pass the context:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> object <span class="pl-k">=</span> {};
+<span class="pl-s">var</span> <span class="pl-en">someFunction</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>);
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(arguments);
+};
+someFunction.<span class="pl-s3">call</span>(object, <span class="pl-s1"><span class="pl-pds">'</span>arg1<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>arg2<span class="pl-pds">'</span></span>); <span class="pl-c">// logs object then arg1 and arg2</span>
+
+<span class="pl-c">// is the same as</span>
+
+someFunction.<span class="pl-s3">apply</span>(object, [<span class="pl-s1"><span class="pl-pds">'</span>arg1<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>arg2<span class="pl-pds">'</span></span>]); <span class="pl-c">// logs object then arg1 and arg2</span></pre></div>
+
+<p>You can pass on object to apply to bind the function's context to that object:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> object <span class="pl-k">=</span> {};
+<span class="pl-s">var</span> <span class="pl-en">someFunction</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() { <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>); };
+
+<span class="pl-s">var</span> <span class="pl-en">boundFunction</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {
+  <span class="pl-k">return</span> someFunction.<span class="pl-s3">apply</span>(object, arguments);
+};
+
+boundFunction(); <span class="pl-c">// logs object</span></pre></div>
+
+<p>Most modern browsers support binding functions natively with the bind method:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> object <span class="pl-k">=</span> {};
+<span class="pl-s">var</span> <span class="pl-en">someFunction</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() { <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>); };
+
+<span class="pl-s">var</span> boundFunction <span class="pl-k">=</span> someFunction.bind(object);
+
+boundFunction(); <span class="pl-c">// logs object</span></pre></div>
+
+<p>Lodash and other libraries provide context binding for browsers that don't support binding:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> object <span class="pl-k">=</span> {};
+<span class="pl-s">var</span> <span class="pl-en">someFunction</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() { <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-v">this</span>); };
+
+<span class="pl-s">var</span> boundFunction <span class="pl-k">=</span> _.bind(someFunction, object);
+<span class="pl-s">var</span> proxyBound <span class="pl-k">=</span> $.proxy(someFunction, object);
+
+boundFunction(); <span class="pl-c">// logs object</span>
+proxyBound(); <span class="pl-c">// logs object</span></pre></div>
+
+<p><img src="https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/mind-blown.gif" alt="Obligatory Mind Blown .gif"></p>
+
+<h2>
+<a id="building-an-autocomplete-widget" class="anchor" href="#building-an-autocomplete-widget" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building An Autocomplete Widget</h2>
+
+<p>Creating object-oriented widgets in JavaScript requires breaking down the desired functionality down into separate objects. We should think of an autocomplete widget as a collection of several objects. It helps to identify each object by visualizing the widget:</p>
+
+<p><img src="https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/autocomplete-diagram.png" alt="Autocomplete Diagram"></p>
+
+<ul>
+<li>
+<strong>Autocomplete</strong> handles coordinating the objects</li>
+<li>
+<strong>Input</strong> handles accepting text input and determining whether to handle text entry or commands</li>
+<li>
+<strong>List</strong> handles showing, hiding, activating, and selecting list items</li>
+<li>
+<strong>List Item</strong> handles interaction with the item</li>
+</ul>
+
+<p>The benefits of this type of architecture is that it is easy to test, easy to extend and does not require traversing or reading the DOM. This helps hedge against unforseen errors when things in the markup change.</p>
+
+<h2>
+<a id="autocompleteinput" class="anchor" href="#autocompleteinput" aria-hidden="true"><span class="octicon octicon-link"></span></a>AutocompleteInput</h2>
+
+<h3>
+<a id="starting-small" class="anchor" href="#starting-small" aria-hidden="true"><span class="octicon octicon-link"></span></a>Starting Small</h3>
+
+<p>It's best to start with the smallest piece possible and then work your way up to the larger pieces. We'll start with the <code>AutocompleteInput</code>.</p>
+
+<p>Every good start involves a test:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteInput<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> subject;
+  <span class="pl-s">var</span> name;
+  <span class="pl-s">var</span> value;
+  <span class="pl-s">var</span> onTextEntrySpy;
+  <span class="pl-s">var</span> onCommandEntrySpy;
+  beforeEach(<span class="pl-st">function</span>() {
+    name <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>;
+    value <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>test value<span class="pl-pds">"</span></span>;
+    onTextEntrySpy <span class="pl-k">=</span> sinon.spy();
+    onCommandEntrySpy <span class="pl-k">=</span> sinon.spy();
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteInput</span>({
+      name<span class="pl-k">:</span> name,
+      value<span class="pl-k">:</span> value,
+      onTextEntry<span class="pl-k">:</span> onTextEntrySpy,
+      onCommandEntry<span class="pl-k">:</span> onCommandEntrySpy
+    });
+  });
+
+});</pre></div>
+
+<h4>
+<a id="describe" class="anchor" href="#describe" aria-hidden="true"><span class="octicon octicon-link"></span></a>describe</h4>
+
+<p>Each <code>describe</code> block is a way to group a set of tests under a given description. This helps keep the tests organized and readable.</p>
+
+<h4>
+<a id="beforeeach" class="anchor" href="#beforeeach" aria-hidden="true"><span class="octicon octicon-link"></span></a>beforeEach</h4>
+
+<p>The <code>beforeEach</code> block is for shared test setup. Here we setup a new instance of our test subject for each test to prevent polluting the instance's state between tests. Notice the variable declarations are outside of the <code>beforeEach</code>block so the variables will be available to each test.</p>
+
+<h4>
+<a id="aftereach" class="anchor" href="#aftereach" aria-hidden="true"><span class="octicon octicon-link"></span></a>afterEach</h4>
+
+<p>If we needed to do some clean up after each test we could use <a href="https://gist.github.com/crismali/2c284bd7f07cd3f8c68a"><code>afterEach</code></a>.</p>
+
+<h4>
+<a id="it" class="anchor" href="#it" aria-hidden="true"><span class="octicon octicon-link"></span></a>it</h4>
+
+<p>Each <code>it</code> block consists of a descriptive string and a function containing our test assertions. Each <code>it</code> block is one test in our suite.</p>
+
+<p>To begin, our <code>AutocompleteInput</code> requires a name and value to use for the input element. Although we could use separate arguments for the name and value, we'll instead use an object to keep our API clean and simple.</p>
+
+<p>Let's write our first test:</p>
+
+<div class="highlight highlight-js"><pre>it(<span class="pl-s1"><span class="pl-pds">"</span>requires a name attribute<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(<span class="pl-st">function</span>() {
+    <span class="pl-k">new</span> <span class="pl-en">AutocompleteInput</span>({ value<span class="pl-k">:</span> value });
+  }).to.throw(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteInput: name is undefined<span class="pl-pds">"</span></span>);
+});</pre></div>
+
+<p>This test asserts that we always pass in a name. Because JavaScript doesn't have default arguments, we need to make sure the attributes object exists before we test the properties on it. We can do this by setting the attributes to what was passed or an empty object: <code>attributes = attributes || {};</code> Now we can test that our <code>AutocompleteInput</code> requires certain attributes.</p>
+
+<p>We don't want to rely on JavaScript throwing a vague error when a required attribute isn't given. The key to a solid API is being explicit and obvious with our requirements. Since our <code>AutocompleteInput</code> needs a name to do its job we need to throw an explicit error when none is given. To do this, we simply check for the property and throw a new <code>Error</code> when it is not present.</p>
+
+<p>Although we CAN throw any standard JavaScript error (ie. <code>ArgumentError</code>, <code>TypeError</code>), older Internet Explorer versions will quietly swallow any type of error except the plain old <code>Error</code>.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteInput</span>(<span class="pl-vpf">attributes</span>) {
+  ...
+
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+
+  <span class="pl-k">if</span> (_.isUndefined(<span class="pl-v">this</span>.<span class="pl-sc">attributes</span>.<span class="pl-sc">name</span>)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteInput: name is undefined<span class="pl-pds">"</span></span>);
+  }
+
+  ...
+}</pre></div>
+
+<p>This should get our first test passing. Now we want to do the same thing with value.</p>
+
+<div class="highlight highlight-js"><pre>it(<span class="pl-s1"><span class="pl-pds">"</span>requires a value<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(<span class="pl-st">function</span>() {
+    <span class="pl-k">new</span> <span class="pl-en">AutocompleteInput</span>({ name<span class="pl-k">:</span> name });
+  }).to.throw(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteInput: value is undefined<span class="pl-pds">"</span></span>);
+});</pre></div>
+
+<p>Now to make it pass:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteInput</span>(<span class="pl-vpf">attributes</span>) {
+  ...
+
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+
+  <span class="pl-k">if</span> (_.isUndefined(attributes.<span class="pl-sc">name</span>)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteInput: name is undefined<span class="pl-pds">"</span></span>);
+  }
+
+  <span class="pl-k">if</span> (_.isUndefined(attributes.<span class="pl-sc">value</span>)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteInput: value is undefined<span class="pl-pds">"</span></span>);
+  }
+
+  ...
+}</pre></div>
+
+<p>Now we want to make sure it sets the attributes correctly on the object itself:</p>
+
+<div class="highlight highlight-js"><pre>it(<span class="pl-s1"><span class="pl-pds">"</span>has a name with `_autocomplete_input` appended<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(subject.<span class="pl-sc">name</span>).to.equal(name <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>_autocomplete_input<span class="pl-pds">"</span></span>);
+});
+
+it(<span class="pl-s1"><span class="pl-pds">"</span>has a value<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(subject.<span class="pl-sc">value</span>).to.equal(value);
+});</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteInput</span>(<span class="pl-vpf">attributes</span>) {
+  ...
+
+  <span class="pl-v">this</span>.<span class="pl-sc">name</span> <span class="pl-k">=</span> attributes.<span class="pl-sc">name</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>_autocomplete_input<span class="pl-pds">"</span></span>;
+  <span class="pl-v">this</span>.<span class="pl-sc">value</span> <span class="pl-k">=</span> attributes.<span class="pl-sc">value</span>;
+
+  ...
+}</pre></div>
+
+<p>Now we want to make sure our <code>AutocompleteInput</code> creates and saves a reference to the jQuery wrapped element that will represent it on the page.</p>
+
+<div class="highlight highlight-js"><pre>it(<span class="pl-s1"><span class="pl-pds">"</span>has an element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(subject.$el).to.exist;
+  expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>autocomplete-input<span class="pl-pds">"</span></span>);
+  expect(subject.$el).to.have.attr(<span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>, name <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>_autocomplete_input<span class="pl-pds">"</span></span>);
+  expect(subject.$el).to.have.attr(<span class="pl-s1"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>, value);
+});</pre></div>
+
+<p>And to make this pass:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteInput</span>(<span class="pl-vpf">attributes</span>) {
+  ...
+
+  <span class="pl-v">this</span>.$el <span class="pl-k">=</span> $(<span class="pl-s1"><span class="pl-pds">"</span>&lt;input name='<span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.<span class="pl-sc">name</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>' value='<span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.<span class="pl-sc">value</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>' /&gt;<span class="pl-pds">"</span></span>);
+
+  ...
+}</pre></div>
+
+<p>Our input's main responsibility is determining whether or not a key press was a query or a command, but it doesn't need to know what happens after that in either case. Our input will accept callbacks to handle each case.</p>
+
+<p>Up in our <code>beforeEach</code> block we set up some spies, now we can take advantage of them. Spies allows us to test whether or not these functions are called and what arguments were passed to them. Since we don't know whether or not the calling code cares about what happens in either case. We create default callbacks that do nothing.</p>
+
+<div class="highlight highlight-js"><pre>...
+
+it(<span class="pl-s1"><span class="pl-pds">"</span>accepts a callback for text entry<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(subject.onTextEntry).to.equal(onTextEntrySpy);
+});
+
+it(<span class="pl-s1"><span class="pl-pds">"</span>accepts a callback for command entry<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(subject.onCommandEntry).to.equal(onCommandEntrySpy);
+});
+
+describe(<span class="pl-s1"><span class="pl-pds">"</span>default callbacks<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  beforeEach(<span class="pl-st">function</span>() {
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteInput</span>({
+      name<span class="pl-k">:</span> name,
+      value<span class="pl-k">:</span> value
+    });
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a default onTextEntry handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.onTextEntry).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a default onCommandEntry handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.onCommandEntry).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+  });
+});
+
+...</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteInput</span>(<span class="pl-vpf">attributes</span>) {
+  ...
+
+  _.defaults(attributes, {
+    <span class="pl-en">onTextEntry</span>: <span class="pl-st">function</span>() {},
+    <span class="pl-en">onCommandEntry</span>: <span class="pl-st">function</span>() {}
+  });
+
+  <span class="pl-v">this</span>.onTextEntry <span class="pl-k">=</span> attributes.onTextEntry;
+  <span class="pl-v">this</span>.onCommandEntry <span class="pl-k">=</span> attributes.onCommandEntry;
+
+  ...
+}</pre></div>
+
+<p>To determine if the user has typed in a text character or a command key, we'll need a list of key codes that match up to keypresses we consider commands. The "commands" we accept are:</p>
+
+<ul>
+<li>The <code>esc</code> key to cancel completion and hide the list</li>
+<li>The <code>enter</code> key to select a currently active completion</li>
+<li>The <code>up</code> key to navigate up the completion list</li>
+<li>The <code>down</code> key to navigate down the completion list</li>
+</ul>
+
+<p>To do this, we're going to create a map of key codes and their corresponding key. Because the key codes are not unique to each instance, we're going to store this map on the <code>AutocompleteInput</code> "Class" itself:</p>
+
+<div class="highlight highlight-js"><pre>it(<span class="pl-s1"><span class="pl-pds">"</span>has a command keycodes constant<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  expect(AutocompleteInput.CMD_KEYCODES.up).to.equal(<span class="pl-c1">38</span>);
+  expect(AutocompleteInput.CMD_KEYCODES.down).to.equal(<span class="pl-c1">40</span>);
+  expect(AutocompleteInput.CMD_KEYCODES.escape).to.equal(<span class="pl-c1">27</span>);
+  expect(AutocompleteInput.CMD_KEYCODES.enter).to.equal(<span class="pl-c1">13</span>);
+
+  expect(AutocompleteInput.CMD_KEYCODES[<span class="pl-c1">38</span>]).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>up<span class="pl-pds">"</span></span>);
+  expect(AutocompleteInput.CMD_KEYCODES[<span class="pl-c1">40</span>]).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>down<span class="pl-pds">"</span></span>);
+  expect(AutocompleteInput.CMD_KEYCODES[<span class="pl-c1">27</span>]).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>escape<span class="pl-pds">"</span></span>);
+  expect(AutocompleteInput.CMD_KEYCODES[<span class="pl-c1">13</span>]).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>enter<span class="pl-pds">"</span></span>);
+});</pre></div>
+
+<p>We expect an object defined on the <code>AutocompleteInput</code> itself to define a map of key codes to keys and vice versa so it's easy to get a key name referenced by key code and a key code referenced by key name:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteInput</span>() {
+  ...
+}
+
+AutocompleteInput.CMD_KEYCODES <span class="pl-k">=</span> {
+  up<span class="pl-k">:</span> <span class="pl-c1">38</span>,
+  down<span class="pl-k">:</span> <span class="pl-c1">40</span>,
+  escape<span class="pl-k">:</span> <span class="pl-c1">27</span>,
+  enter<span class="pl-k">:</span> <span class="pl-c1">13</span>
+};
+
+AutocompleteInput.CMD_KEYCODES <span class="pl-k">=</span> _.merge(AutocompleteInput.CMD_KEYCODES, _.invert(AutocompleteInput.CMD_KEYCODES));</pre></div>
+
+<p>Now we have a way to know when a command key is entered into the input.</p>
+
+<p>It's time to start defining instance methods and properties on our <code>AutocompleteInput</code>. Instead of typing <code>AutocompleteInput.prototype.someFunction = ...</code> for every method. We'll use lodash's <code>merge</code> method to cut down on the noise.</p>
+
+<p>The <code>merge</code> method takes the properties of one object, and copies them over to another object. This means we can <code>merge</code> a plain object containing our instance methods onto the <code>AutocompleteInut</code>'s prototype:</p>
+
+<div class="highlight highlight-js"><pre>_.merge(AutocompleteInput.<span class="pl-sc">prototype</span>, {
+  <span class="pl-en">someMethod</span>: <span class="pl-st">function</span>() {
+    ...
+  }
+});</pre></div>
+
+<p>It looks a bit strange at first but it's better than all the extra noise.</p>
+
+<p>It's time to do a slight refactor. Since we're using lodash, we'd like a cleaner way to create template strings than concatenating strings together. Lodash's <code>template</code> method is perfect for this. The <code>template</code> method accepts a string with specially formatted placeholders for interpolation when the template is rendered. The <code>template</code> method returns a function that accepts an object with keys corresponding to it's placeholders. Let's refactor our element to use a lodash <code>template</code>:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>#template<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> templateValues;
+  <span class="pl-s">var</span> renderedTemplate;
+  beforeEach(<span class="pl-st">function</span>() {
+    templateValues <span class="pl-k">=</span> {
+      name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>test_name<span class="pl-pds">"</span></span>,
+      value<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>test_value<span class="pl-pds">"</span></span>
+    };
+    renderedTemplate <span class="pl-k">=</span> subject.template(templateValues);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>is an input<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(renderedTemplate).to.<span class="pl-s3">match</span>(<span class="pl-sr"><span class="pl-pds">/</span><span class="pl-k">^</span><span class="pl-cce">\&lt;</span>input<span class="pl-pds">/</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a name parameter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(renderedTemplate).to.<span class="pl-s3">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>name=<span class="pl-cce">\'</span>test_name<span class="pl-cce">\'</span><span class="pl-pds">/</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a value parameter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(renderedTemplate).to.<span class="pl-s3">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>value=<span class="pl-cce">\'</span>test_value<span class="pl-cce">\'</span><span class="pl-pds">/</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an autocomplete-input class<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(renderedTemplate).to.<span class="pl-s3">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>class=<span class="pl-cce">\'</span>autocomplete-input<span class="pl-cce">\'</span><span class="pl-pds">/</span></span>);
+  });
+});</pre></div>
+
+<p>Now we need to create a template to make these pass:</p>
+
+<div class="highlight highlight-js"><pre>_.merge(AutocompleteInput.<span class="pl-sc">prototype</span>, {
+  template<span class="pl-k">:</span> _.template(<span class="pl-s1"><span class="pl-pds">"</span>&lt;input name='&lt;%= name %&gt;' class='autocomplete-input' value='&lt;%= value %&gt;' /&gt;<span class="pl-pds">"</span></span>)
+})</pre></div>
+
+<p>Now every instance of an <code>AutocompleteInput</code> will have a template method that can generate the markup it needs.</p>
+
+<p>The next thing our <code>AutocompleteInput</code> needs to do is determine when a command key is pressed. Let's create an <code>isCommandKey</code> method to determine what key was pressed with a given key code:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>#isCommandKey<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  it(<span class="pl-s1"><span class="pl-pds">"</span>returns true when a command keyCode is given<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.isCommandKey(<span class="pl-c1">38</span>)).to.be.true;
+    expect(subject.isCommandKey(<span class="pl-c1">40</span>)).to.be.true;
+    expect(subject.isCommandKey(<span class="pl-c1">27</span>)).to.be.true;
+    expect(subject.isCommandKey(<span class="pl-c1">13</span>)).to.be.true;
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>returns false when a non command keyCode is given<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.isCommandKey(<span class="pl-c1">84</span>)).to.be.false;
+  });
+});</pre></div>
+
+<p>Now we can simply use the given key code and our <code>CMD_KEYCODES</code> map to find a match:</p>
+
+<div class="highlight highlight-js"><pre>_.merge(AutocompleteInput.<span class="pl-sc">prototype</span>, {
+  ...
+
+  <span class="pl-en">isCommandKey</span>: <span class="pl-st">function</span>(<span class="pl-vpf">keyCode</span>) {
+    <span class="pl-k">return</span> _.contains(AutocompleteInput.CMD_KEYCODES, keyCode);
+  },
+
+  ...
+});</pre></div>
+
+<p>The last thing our <code>AutocompleteInput</code> needs to do is call our text input and command callbacks when keys are pressed. Here is where we get into using spies to test how and when functions are called. We use a spy when we want to determine if a method was called and what arguments were passed to it. In this case we need to test that the proper handlers are called when a key is pressed:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>#onKeyup<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>command<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.handleKeyup({ keyCode<span class="pl-k">:</span> AutocompleteInput.CMD_KEYCODES.enter });
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>does not call the onTextEntry callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.<span class="pl-sc">attributes</span>.onTextEntry).to.not.have.been.called;
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onCommandEntry callback with the given command<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.<span class="pl-sc">attributes</span>.onCommandEntry).to.have.been.calledWith(<span class="pl-s1"><span class="pl-pds">"</span>enter<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.$el.val(<span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>);
+      subject.handleKeyup({ keyCode<span class="pl-k">:</span> <span class="pl-c1">84</span> });
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onTextEntry callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.<span class="pl-sc">attributes</span>.onTextEntry).to.have.been.calledWith(<span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>does not call the onCommandEntry callback with the given command<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.<span class="pl-sc">attributes</span>.onCommandEntry).not.to.have.been.called;
+    });
+  });
+});</pre></div>
+
+<p>Now we simply utilize our <code>isCommandKey</code> method to determine which handler to call:</p>
+
+<div class="highlight highlight-js"><pre>_.merge(AutocompleteInput.<span class="pl-sc">prototype</span>, {
+  ...
+
+  <span class="pl-en">handleKeyup</span>: <span class="pl-st">function</span>(<span class="pl-vpf">evnt</span>) {
+    <span class="pl-k">if</span> (<span class="pl-v">this</span>.isCommandKey(evnt.keyCode)) {
+      <span class="pl-s">var</span> command <span class="pl-k">=</span> AutocompleteInput.CMD_KEYCODES[evnt.keyCode];
+      <span class="pl-v">this</span>.<span class="pl-sc">attributes</span>.onCommandEntry(command);
+    } <span class="pl-k">else</span> {
+      <span class="pl-v">this</span>.<span class="pl-sc">attributes</span>.onTextEntry(<span class="pl-v">this</span>.$el.val());
+    }
+  }
+});</pre></div>
+
+<p>That's all our <code>AutocompleteInput</code> needs to do. It's small, easy to test, and extendable.</p>
+
+<h2>
+<a id="autocompletelistitem" class="anchor" href="#autocompletelistitem" aria-hidden="true"><span class="octicon octicon-link"></span></a>AutocompleteListItem</h2>
+
+<p>The next part of functionality of an autocompleter is a completion list but since we're working from small to large, we'll start with the list items before we get to the list.</p>
+
+<p>A list item's job is very simple. It need to store the value and text of the item, activate and deactivate the highlight on the item, and select the item when it is clicked. Let's take care of the basics:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteListItem<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> subject;
+  <span class="pl-s">var</span> testText;
+  <span class="pl-s">var</span> testValue;
+  <span class="pl-s">var</span> onSelectSpy;
+
+  beforeEach(<span class="pl-st">function</span>() {
+    testText <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Test Item<span class="pl-pds">"</span></span>;
+    testValue <span class="pl-k">=</span> <span class="pl-c1">1</span>;
+    onSelectSpy <span class="pl-k">=</span> sinon.spy();
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteListItem</span>({
+      <span class="pl-s3">onSelect</span><span class="pl-k">:</span> onSelectSpy,
+      item<span class="pl-k">:</span> {
+        value<span class="pl-k">:</span> testValue,
+        text<span class="pl-k">:</span> testText
+      }
+    });
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.$el).to.exist;
+    expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>autocomplete-list-item<span class="pl-pds">"</span></span>);
+    expect(subject.$el[<span class="pl-c1">0</span>].<span class="pl-sc">tagName</span>).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>LI<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a value<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.<span class="pl-sc">value</span>).to.equal(testValue);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has text<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.<span class="pl-sc">text</span>).to.equal(testText);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a template<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.template).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+    <span class="pl-s">var</span> renderedTemplate <span class="pl-k">=</span> subject.template({ text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>foo<span class="pl-pds">"</span></span> });
+    expect(renderedTemplate).to.<span class="pl-s3">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>foo<span class="pl-pds">/</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an onSelect handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.<span class="pl-s3">onSelect</span>).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a active state<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.active).to.be.false;
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#activate<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.activate();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>sets active to true<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.active).to.be.true;
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>adds the active class to el<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#deactivate<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.active <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+      subject.$el.addClass(<span class="pl-s1"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span>);
+      subject.deactivate();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>sets active to false<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.active).to.be.false;
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>removes the active class from el<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.not.have.class(<span class="pl-s1"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#select<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onClick function, passing itself<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.<span class="pl-s3">select</span>();
+      expect(subject.<span class="pl-s3">onClick</span>).to.have.been.calledWith(subject);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#registerEvents<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>handles click<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.$el.trigger(<span class="pl-s1"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>);
+      expect(subject.<span class="pl-s3">onClick</span>).to.have.been.called;
+    });
+  });
+});
+</pre></div>
+
+<p>This handles creating a DOM element for each list item and it's properties, as well as activating and deactivating the item and calling the handlers when an item is selected:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteListItem</span>(<span class="pl-vpf">attributes</span>) {
+  _.bindAll(<span class="pl-v">this</span>);
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+  _.defaults(attributes, {
+    <span class="pl-en">onSelect</span>: <span class="pl-st">function</span>() {}
+  });
+
+  <span class="pl-v">this</span>.<span class="pl-sc">value</span> <span class="pl-k">=</span> attributes.item.<span class="pl-sc">value</span>;
+  <span class="pl-v">this</span>.<span class="pl-sc">text</span> <span class="pl-k">=</span> attributes.item.<span class="pl-sc">text</span>;
+  <span class="pl-v">this</span>.<span class="pl-s3">onSelect</span> <span class="pl-k">=</span> attributes.<span class="pl-s3">onSelect</span>;
+
+  <span class="pl-v">this</span>.$el <span class="pl-k">=</span> $(<span class="pl-v">this</span>.template({
+    value<span class="pl-k">:</span> <span class="pl-v">this</span>.<span class="pl-sc">value</span>,
+    text<span class="pl-k">:</span> <span class="pl-v">this</span>.<span class="pl-sc">text</span>
+  }));
+  <span class="pl-v">this</span>.active <span class="pl-k">=</span> <span class="pl-c1">false</span>;
+
+  <span class="pl-v">this</span>.registerEvents();
+}
+
+_.merge(AutocompleteListItem.<span class="pl-sc">prototype</span>, {
+
+  template<span class="pl-k">:</span> _.template(<span class="pl-s1"><span class="pl-pds">'</span>&lt;li class="autocomplete-list-item"&gt;&lt;a href="#"&gt;&lt;%= text %&gt;&lt;/a&gt;&lt;/li&gt;<span class="pl-pds">'</span></span>),
+
+  <span class="pl-en">activate</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.active <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+    <span class="pl-v">this</span>.$el.addClass(<span class="pl-s1"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span>);
+  },
+
+  <span class="pl-en">deactivate</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.active <span class="pl-k">=</span> <span class="pl-c1">false</span>;
+    <span class="pl-v">this</span>.$el.removeClass(<span class="pl-s1"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span>);
+  },
+
+  <span class="pl-en">registerEvents</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.$el.on(<span class="pl-s1"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>, <span class="pl-v">this</span>.select);
+  },
+
+  <span class="pl-en">select</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.<span class="pl-s3">onSelect</span>(<span class="pl-v">this</span>);
+  }
+
+});</pre></div>
+
+<p>Our <code>AutocompleteListItem</code> "Class" is complete. Now we need a list to manage them:</p>
+
+<h2>
+<a id="autocompletelist" class="anchor" href="#autocompletelist" aria-hidden="true"><span class="octicon octicon-link"></span></a>AutocompleteList</h2>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteList<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> subject;
+  <span class="pl-s">var</span> item1;
+  <span class="pl-s">var</span> item2;
+  <span class="pl-s">var</span> item3;
+  <span class="pl-s">var</span> items;
+  <span class="pl-s">var</span> onItemSelectSpy;
+  beforeEach(<span class="pl-st">function</span>() {
+    item1 <span class="pl-k">=</span> { value<span class="pl-k">:</span> <span class="pl-c1">1</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 1<span class="pl-pds">"</span></span> };
+    item2 <span class="pl-k">=</span> { value<span class="pl-k">:</span> <span class="pl-c1">2</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 2<span class="pl-pds">"</span></span> };
+    item3 <span class="pl-k">=</span> { value<span class="pl-k">:</span> <span class="pl-c1">3</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 3<span class="pl-pds">"</span></span> };
+    items <span class="pl-k">=</span> [item1, item2, item3];
+    onItemSelectSpy <span class="pl-k">=</span> sinon.spy();
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteList</span>({ onItemSelect<span class="pl-k">:</span> onItemSelectSpy });
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.$el).to.exist;
+    expect(subject.$el[<span class="pl-c1">0</span>].<span class="pl-sc">tagName</span>).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>UL<span class="pl-pds">"</span></span>);
+    expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>autocomplete-list<span class="pl-pds">"</span></span>);
+    expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an onItemSelect handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.onItemSelect).to.equal(onItemSelectSpy);
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>defaults<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteList</span>();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>has an onItemSelect handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.onItemSelect).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#render<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.render(items);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>creates an completionListItem for each item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.items).to.be.an(<span class="pl-s1"><span class="pl-pds">"</span>Array<span class="pl-pds">"</span></span>);
+      expect(subject.items.<span class="pl-sc">length</span>).to.equal(items.<span class="pl-sc">length</span>);
+      _.each(subject.items, <span class="pl-st">function</span>(<span class="pl-vpf">item</span>) {
+        expect(item).to.be.an.instanceof(AutocompleteListItem);
+      });
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>appends each item to the element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.have.descendants(<span class="pl-s1"><span class="pl-pds">"</span>li<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>removes the hidden class<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).not.to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>does not double render the items<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.render(items);
+      expect(subject.$el.<span class="pl-s3">find</span>(<span class="pl-s1"><span class="pl-pds">"</span>li<span class="pl-pds">"</span></span>).<span class="pl-sc">length</span>).to.equal(items.<span class="pl-sc">length</span>);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when there are no items<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.$el.removeClass(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+        subject.$el.empty();
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>it adds the hidden class<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.render([]);
+        expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>does not throw an error when items are undefined<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(<span class="pl-st">function</span>() {
+          subject.render();
+        }).not.to.throw();
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#hide<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>adds the hidden class to the element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.$el.removeClass(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+      subject.hide();
+      expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#show<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>removes the hidden class from the element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.$el.addClass(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+      subject.show();
+      expect(subject.$el).not.to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleItemSelect<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> selectedItem;
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.render(items);
+      subject.show();
+      selectedItem <span class="pl-k">=</span> _.first(subject.items);
+      subject.handleItemSelect(selectedItem);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onItemSelect callback, passing the item clicked<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.onItemSelect).to.have.been.calledWith(selectedItem);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>hides the completion list<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#activeItem<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.createListItems(items);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>returns undefined when no item is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.activeItem()).to.be.<span class="pl-sc">undefined</span>;
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>returns the active item when one is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      <span class="pl-s">var</span> activeItem <span class="pl-k">=</span> _.first(subject.items);
+      activeItem.activate();
+      expect(subject.activeItem()).to.equal(activeItem);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#nextItem<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.createListItems(items);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when no items are active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>returns the first item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.nextItem()).to.equal(_.first(subject.items));
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when an item is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        _.first(subject.items).activate();
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>returns the next item in the items array<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.nextItem()).to.equal(subject.items[<span class="pl-c1">1</span>]);
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when the last item is already active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>returns the first item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        _.last(subject.items).activate();
+        expect(subject.nextItem()).to.equal(_.first(subject.items));
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#activateNextItem<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.createListItems(items);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when no items are active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>activates the first item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.activateNextItem();
+        expect(_.first(subject.items).active).to.be.true;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when an item is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        _.first(subject.items).activate();
+        subject.activateNextItem();
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>activates the next item in the items array<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.items[<span class="pl-c1">1</span>].active).to.be.true;
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>deactivates the previously active item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(_.first(subject.items).active).to.be.false;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when the last item is already active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>activates the first item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        _.last(subject.items).activate();
+        subject.activateNextItem();
+        expect(_.first(subject.items).active).to.be.true;
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#previousItem<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.createListItems(items);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when no items are active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>returns the last item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.previousItem()).to.equal(_.last(subject.items));
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when an item is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        _.last(subject.items).activate();
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>returns the next item in the items array<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.previousItem()).to.equal(subject.items[<span class="pl-c1">1</span>]);
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when the first item is already active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>returns the last item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        _.first(subject.items).activate();
+        expect(subject.previousItem()).to.equal(_.last(subject.items));
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#activatePreviousItem<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.createListItems(items);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when no items are active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>activates the last item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.activatePreviousItem();
+        expect(_.last(subject.items).active).to.be.true;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when an item is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        _.last(subject.items).activate();
+        subject.activatePreviousItem();
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>activates the previous item in the items array<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.items[<span class="pl-c1">1</span>].active).to.be.true;
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>deactivates the previously active item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(_.last(subject.items).active).to.be.false;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when the first item is already active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>activates the last item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        _.first(subject.items).activate();
+        subject.activatePreviousItem();
+        expect(_.last(subject.items).active).to.be.true;
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleCommandEntry<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      sinon.stub(subject, <span class="pl-s1"><span class="pl-pds">"</span>handleUp<span class="pl-pds">"</span></span>);
+      sinon.stub(subject, <span class="pl-s1"><span class="pl-pds">"</span>handleDown<span class="pl-pds">"</span></span>);
+      sinon.stub(subject, <span class="pl-s1"><span class="pl-pds">"</span>handleEnter<span class="pl-pds">"</span></span>);
+      sinon.stub(subject, <span class="pl-s1"><span class="pl-pds">"</span>handleEscape<span class="pl-pds">"</span></span>);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>up<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.handleCommandEntry(<span class="pl-s1"><span class="pl-pds">"</span>up<span class="pl-pds">"</span></span>);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>handles up<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.handleUp).to.have.been.called;
+        expect(subject.handleDown).to.not.have.been.called;
+        expect(subject.handleEnter).to.not.have.been.called;
+        expect(subject.handleEscape).to.not.have.been.called;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>down<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.handleCommandEntry(<span class="pl-s1"><span class="pl-pds">"</span>down<span class="pl-pds">"</span></span>);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>handles down<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.handleDown).to.have.been.called;
+        expect(subject.handleUp).to.not.have.been.called;
+        expect(subject.handleEnter).to.not.have.been.called;
+        expect(subject.handleEscape).to.not.have.been.called;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>enter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.handleCommandEntry(<span class="pl-s1"><span class="pl-pds">"</span>enter<span class="pl-pds">"</span></span>);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>handles enter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.handleEnter).to.have.been.called;
+        expect(subject.handleUp).to.not.have.been.called;
+        expect(subject.handleDown).to.not.have.been.called;
+        expect(subject.handleEscape).to.not.have.been.called;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>escape<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.handleCommandEntry(<span class="pl-s1"><span class="pl-pds">"</span>escape<span class="pl-pds">"</span></span>);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>handles escape<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.handleEscape).to.have.been.called;
+        expect(subject.handleUp).to.not.have.been.called;
+        expect(subject.handleDown).to.not.have.been.called;
+        expect(subject.handleEnter).to.not.have.been.called;
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleDown<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      sinon.spy(subject, <span class="pl-s1"><span class="pl-pds">"</span>activateNextItem<span class="pl-pds">"</span></span>);
+      subject.createListItems(items);
+      subject.handleDown();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>activates the next item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.activateNextItem).to.have.been.called;
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleUp<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.createListItems(items);
+      sinon.spy(subject, <span class="pl-s1"><span class="pl-pds">"</span>activatePreviousItem<span class="pl-pds">"</span></span>);
+      subject.handleUp();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>activates the previous item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.activatePreviousItem).to.have.been.called;
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleEscape<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      sinon.spy(subject, <span class="pl-s1"><span class="pl-pds">"</span>hide<span class="pl-pds">"</span></span>);
+      subject.handleEscape();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>hides the list<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.hide).to.have.been.called;
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleEnter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when an item is active<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      <span class="pl-s">var</span> item;
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.createListItems(items);
+        item <span class="pl-k">=</span> _.first(subject.items);
+        item.activate();
+        sinon.spy(item, <span class="pl-s1"><span class="pl-pds">"</span>select<span class="pl-pds">"</span></span>);
+        subject.handleEnter();
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>selects the active item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(item.select).to.have.been.called;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when there is no active item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>does not throw an error<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(<span class="pl-st">function</span>() {
+          subject.handleEnter();
+        }).not.to.throw();
+      });
+    });
+  });
+});
+</pre></div>
+
+<p>This is the busiest "Class" in the autocompleter, which makes sense. It needs to handle rendering the list items, activating and deactivating items when the list is navigated, and hiding and showing the list when certain commands are entered. Thankfully TDD makes this a straight-forward and simple process:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteList</span>(<span class="pl-vpf">attributes</span>) {
+  _.bindAll(<span class="pl-v">this</span>);
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+  _.defaults(attributes, {
+    <span class="pl-en">onItemSelect</span>: <span class="pl-st">function</span>() {}
+  });
+
+  <span class="pl-v">this</span>.onItemSelect <span class="pl-k">=</span> attributes.onItemSelect;
+  <span class="pl-v">this</span>.$el <span class="pl-k">=</span> $(<span class="pl-s1"><span class="pl-pds">"</span>&lt;ul class='autocomplete-list hidden'/&gt;<span class="pl-pds">"</span></span>);
+}
+
+_.merge(AutocompleteList.<span class="pl-sc">prototype</span>, {
+
+  <span class="pl-en">render</span>: <span class="pl-st">function</span>(<span class="pl-vpf">items</span>) {
+    <span class="pl-v">this</span>.$el.empty();
+    <span class="pl-k">if</span> (_.isEmpty(items)) {
+      <span class="pl-v">this</span>.hide();
+    } <span class="pl-k">else</span> {
+      <span class="pl-v">this</span>.createListItems(items);
+      <span class="pl-v">this</span>.renderItems();
+      <span class="pl-v">this</span>.show();
+    }
+  },
+
+  <span class="pl-en">hide</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.$el.addClass(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+  },
+
+  <span class="pl-en">show</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.$el.removeClass(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);
+  },
+
+  <span class="pl-en">createListItems</span>: <span class="pl-st">function</span>(<span class="pl-vpf">items</span>) {
+    <span class="pl-v">this</span>.items <span class="pl-k">=</span> _.map(items, <span class="pl-v">this</span>.createListItem);
+  },
+
+  <span class="pl-en">createListItem</span>: <span class="pl-st">function</span>(<span class="pl-vpf">item</span>) {
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteListItem</span>({ item<span class="pl-k">:</span> item, <span class="pl-s3">onSelect</span><span class="pl-k">:</span> <span class="pl-v">this</span>.handleItemSelect });
+  },
+
+  <span class="pl-en">handleItemSelect</span>: <span class="pl-st">function</span>(<span class="pl-vpf">item</span>) {
+    <span class="pl-v">this</span>.onItemSelect(item);
+    <span class="pl-v">this</span>.hide();
+  },
+
+  <span class="pl-en">renderItems</span>: <span class="pl-st">function</span>() {
+    _.each(<span class="pl-v">this</span>.items, <span class="pl-v">this</span>.renderItem);
+  },
+
+  <span class="pl-en">renderItem</span>: <span class="pl-st">function</span>(<span class="pl-vpf">item</span>) {
+    <span class="pl-v">this</span>.$el.append(item.$el);
+  },
+
+  <span class="pl-en">activeItem</span>: <span class="pl-st">function</span>() {
+    <span class="pl-k">return</span> _.<span class="pl-s3">find</span>(<span class="pl-v">this</span>.items, <span class="pl-s1"><span class="pl-pds">"</span>active<span class="pl-pds">"</span></span>);
+  },
+
+  <span class="pl-en">nextItem</span>: <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> nextIndex <span class="pl-k">=</span> _.<span class="pl-s3">indexOf</span>(<span class="pl-v">this</span>.items, <span class="pl-v">this</span>.activeItem()) <span class="pl-k">+</span> <span class="pl-c1">1</span>;
+    <span class="pl-s">var</span> nextItem <span class="pl-k">=</span> <span class="pl-v">this</span>.items[nextIndex] <span class="pl-k">||</span> _.first(<span class="pl-v">this</span>.items);
+    <span class="pl-k">return</span> nextItem;
+  },
+
+  <span class="pl-en">activateNextItem</span>: <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> currentlySelected <span class="pl-k">=</span> <span class="pl-v">this</span>.activeItem();
+    <span class="pl-v">this</span>.nextItem().activate();
+    <span class="pl-k">if</span> (currentlySelected) {
+      currentlySelected.deactivate();
+    }
+  },
+
+  <span class="pl-en">previousItem</span>: <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> previousIndex <span class="pl-k">=</span> _.<span class="pl-s3">indexOf</span>(<span class="pl-v">this</span>.items, <span class="pl-v">this</span>.activeItem()) <span class="pl-k">-</span> <span class="pl-c1">1</span>;
+    <span class="pl-s">var</span> previousItem <span class="pl-k">=</span> <span class="pl-v">this</span>.items[previousIndex] <span class="pl-k">||</span> _.last(<span class="pl-v">this</span>.items);
+    <span class="pl-k">return</span> previousItem;
+  },
+
+  <span class="pl-en">activatePreviousItem</span>: <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> currentlySelected <span class="pl-k">=</span> <span class="pl-v">this</span>.activeItem();
+    <span class="pl-v">this</span>.previousItem().activate();
+    <span class="pl-k">if</span> (currentlySelected) {
+      currentlySelected.deactivate();
+    }
+  },
+
+  <span class="pl-en">handleCommandEntry</span>: <span class="pl-st">function</span>(<span class="pl-vpf">command</span>) {
+    <span class="pl-v">this</span>[<span class="pl-s1"><span class="pl-pds">"</span>handle<span class="pl-pds">"</span></span> <span class="pl-k">+</span> _.capitalize(command)]();
+  },
+
+  <span class="pl-en">handleDown</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.activateNextItem();
+  },
+
+  <span class="pl-en">handleUp</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.activatePreviousItem();
+  },
+
+  <span class="pl-en">handleEnter</span>: <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> activeItem <span class="pl-k">=</span> <span class="pl-v">this</span>.activeItem();
+    <span class="pl-k">if</span> (activeItem) {
+      activeItem.<span class="pl-s3">select</span>();
+    }
+  },
+
+  <span class="pl-en">handleEscape</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.hide();
+  }
+
+});</pre></div>
+
+<p>Now that we have our DOM components created we need to create the objects that will handle actually auto completing text when entered into the input. We'd like to be able to either provide a list of items to complete or a URL to a server endpoint that will fetch completions. Since this behavior is slightly different in each case, we'll create adapters to handle each of them. Let's start with an adapter for filtering a provided list:</p>
+
+<h2>
+<a id="autocompletelocaladapter" class="anchor" href="#autocompletelocaladapter" aria-hidden="true"><span class="octicon octicon-link"></span></a>AutocompleteLocalAdapter</h2>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteLocalAdapter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> subject;
+  <span class="pl-s">var</span> items;
+  <span class="pl-s">var</span> onAutocompleteSpy;
+  beforeEach(<span class="pl-st">function</span>() {
+    items <span class="pl-k">=</span> [
+      { value<span class="pl-k">:</span> <span class="pl-c1">1</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 1<span class="pl-pds">"</span></span> },
+      { value<span class="pl-k">:</span> <span class="pl-c1">2</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 2<span class="pl-pds">"</span></span> },
+      { value<span class="pl-k">:</span> <span class="pl-c1">3</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 3<span class="pl-pds">"</span></span> }
+    ];
+    onAutocompleteSpy <span class="pl-k">=</span> sinon.spy();
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteLocalAdapter</span>({
+      items<span class="pl-k">:</span> items,
+      onAutocomplete<span class="pl-k">:</span> onAutocompleteSpy
+    });
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>requires items<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(<span class="pl-st">function</span>() {
+      <span class="pl-k">new</span> <span class="pl-en">AutocompleteLocalAdapter</span>;
+    }).to.throw(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteLocalAdapter: items is undefined<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an onAutocomplete callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.onAutocompleteSpy).to.equal(onAutocompleteSpy);
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>defaults<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteLocalAdapter</span>({
+        items<span class="pl-k">:</span> items
+      });
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>has a default onAutocomplete handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.onAutocomplete).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleTextEntry<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when empty text is passed<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onAutocomplete callback, passing an empty array of items<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.handleTextEntry(<span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>);
+        expect(subject.onAutocomplete).to.have.been.calledWith([]);
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when text is passed<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      beforeEach(<span class="pl-st">function</span>() {
+        subject.handleTextEntry(<span class="pl-s1"><span class="pl-pds">"</span>Test item 3<span class="pl-pds">"</span></span>);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onAutocomplete callback, passing an array of matching items<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        expect(subject.onAutocomplete).to.have.been.calledWith([_.last(items)]);
+      });
+    });
+  });
+});</pre></div>
+
+<p>And now the implementation:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteLocalAdapter</span>(<span class="pl-vpf">attributes</span>) {
+  _.bindAll(<span class="pl-v">this</span>);
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+  _.defaults(attributes, {
+    <span class="pl-en">onAutocomplete</span>: <span class="pl-st">function</span>() {}
+  });
+
+  <span class="pl-k">if</span> (_.isUndefined(attributes.items)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteLocalAdapter: items is undefined<span class="pl-pds">"</span></span>);
+  }
+
+  <span class="pl-v">this</span>.items <span class="pl-k">=</span> attributes.items;
+  <span class="pl-v">this</span>.onAutocomplete <span class="pl-k">=</span> attributes.onAutocomplete;
+}
+
+_.merge(AutocompleteLocalAdapter.<span class="pl-sc">prototype</span>, {
+
+  <span class="pl-en">handleTextEntry</span>: <span class="pl-st">function</span>(<span class="pl-vpf">text</span>) {
+    <span class="pl-s">var</span> items <span class="pl-k">=</span> [];
+    <span class="pl-k">if</span> (text) {
+      <span class="pl-v">this</span>.filter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">RegExp</span>(<span class="pl-s1"><span class="pl-pds">"</span>^<span class="pl-pds">"</span></span> <span class="pl-k">+</span> text, <span class="pl-s1"><span class="pl-pds">"</span>i<span class="pl-pds">"</span></span>);
+      items <span class="pl-k">=</span> _.filter(<span class="pl-v">this</span>.items, <span class="pl-v">this</span>.itemMatchesFilter);
+    }
+    <span class="pl-v">this</span>.onAutocomplete(items);
+  },
+
+  <span class="pl-en">itemMatchesFilter</span>: <span class="pl-st">function</span>(<span class="pl-vpf">item</span>) {
+    <span class="pl-k">return</span> item.<span class="pl-sc">text</span>.<span class="pl-s3">match</span>(<span class="pl-v">this</span>.filter);
+  }
+
+});</pre></div>
+
+<h2>
+<a id="autocompleteajaxadapter" class="anchor" href="#autocompleteajaxadapter" aria-hidden="true"><span class="octicon octicon-link"></span></a>AutocompleteAjaxAdapter</h2>
+
+<p>Now let's make an adapter to handle fetching completions from a remote server with an AJAX adapter:</p>
+
+<p>It can be tricky to test asynchronous functions like AJAX calls. This is where sinon comes to the rescue. Sinon lets us mock out AJAX request and perform assertions without actually calling out to a remote server. To do this, we need to set up fake XHR request handling:</p>
+
+<div class="highlight highlight-js"><pre>...
+
+<span class="pl-s">var</span> xhr;
+<span class="pl-s">var</span> requests;
+beforeEach(<span class="pl-st">function</span>() {
+  ...
+
+  xhr <span class="pl-k">=</span> sinon.useFakeXMLHttpRequest();
+  requests <span class="pl-k">=</span> [];
+  <span class="pl-s3">xhr</span>.<span class="pl-en">onCreate</span> <span class="pl-k">=</span> <span class="pl-st">function</span>(<span class="pl-vpf">xhr</span>) {
+    requests.<span class="pl-s3">push</span>(xhr);
+  };
+
+  ...
+})</pre></div>
+
+<p>Now whenever an AJAX request is made in our code, it will be captured in the <code>requests</code> array. Let's write some tests:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteAjaxAdapter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> subject;
+  <span class="pl-s">var</span> onAutocomplete;
+  <span class="pl-s">var</span> xhr;
+  <span class="pl-s">var</span> requests;
+  beforeEach(<span class="pl-st">function</span>() {
+    xhr <span class="pl-k">=</span> sinon.useFakeXMLHttpRequest();
+    requests <span class="pl-k">=</span> [];
+    <span class="pl-s3">xhr</span>.<span class="pl-en">onCreate</span> <span class="pl-k">=</span> <span class="pl-st">function</span>(<span class="pl-vpf">xhr</span>) {
+      requests.<span class="pl-s3">push</span>(xhr);
+    };
+    onAutocomplete <span class="pl-k">=</span> sinon.spy();
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteAjaxAdapter</span>({
+      url<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+      onAutocomplete<span class="pl-k">:</span> onAutocomplete
+    });
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>requires a url<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(<span class="pl-st">function</span>() {
+      <span class="pl-k">new</span> <span class="pl-en">AutocompleteAjaxAdapter</span>;
+    }).to.throw(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteAjaxAdapter: url is undefined<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a url<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.url).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has an onAutocomplete handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.onAutocomplete).to.equal(onAutocompleteSpy);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>has a throttle delay<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(subject.throttleDelay).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>number<span class="pl-pds">"</span></span>);
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>defaults<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteAjaxAdapter</span>({
+        url<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>
+      });
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>has a default onAutocomplete handler<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.onAutocomplete).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleTextEntry<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> text;
+    beforeEach(<span class="pl-st">function</span>() {
+      text <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>test query<span class="pl-pds">"</span></span>;
+      sinon.spy(<span class="pl-s3">window</span>, <span class="pl-s1"><span class="pl-pds">"</span>clearTimeout<span class="pl-pds">"</span></span>);
+      sinon.spy(subject, <span class="pl-s1"><span class="pl-pds">"</span>queueRequest<span class="pl-pds">"</span></span>);
+    });
+
+    afterEach(<span class="pl-st">function</span>() {
+      clearTimeout.restore();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>sets the query<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.handleTextEntry(text);
+      expect(subject.query).to.equal(text);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>queues a request<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.handleTextEntry(text);
+      expect(subject.queueRequest).to.have.been.called;
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when there's a queued request<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>clears the timeout<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.queuedRequest <span class="pl-k">=</span> <span class="pl-c1">5</span>;
+        subject.handleTextEntry(text);
+        expect(clearTimeout).to.have.been.calledWith(<span class="pl-c1">5</span>);
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when there is not a queued request<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>does nothing<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.handleTextEntry(text);
+        expect(clearTimeout).not.to.have.been.called;
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when the text is empty<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>does not queue a request<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.handleTextEntry(<span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>);
+        expect(subject.queuedRequest).to.be.<span class="pl-sc">undefined</span>;
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>clears a request out<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.queuedRequest <span class="pl-k">=</span> <span class="pl-c1">15</span>;
+        subject.handleTextEntry(<span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>);
+        expect(clearTimeout).to.have.been.calledWith(subject.queuedRequest);
+      });
+
+      it(<span class="pl-s1"><span class="pl-pds">"</span>sends an empty array to the on autocomplete callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject.handleTextEntry(<span class="pl-s1"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>);
+        expect(subject.onAutocomplete).to.have.been.calledWith([]);
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#fetchItems<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>gets the items via ajax<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      subject.fetchItems();
+      <span class="pl-s">var</span> request <span class="pl-k">=</span> _.last(requests);
+      expect(request.url).to.equal(subject.url);
+      expect(request.<span class="pl-sc">method</span>).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>GET<span class="pl-pds">"</span></span>);
+      expect(request.requestHeaders.Accept).to.<span class="pl-s3">match</span>(<span class="pl-sr"><span class="pl-pds">/</span>application<span class="pl-cce">\/</span>json<span class="pl-pds">/</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#queueRequest<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    beforeEach(<span class="pl-st">function</span>() {
+      subject.throttleDelay <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+      sinon.spy(<span class="pl-s3">window</span>, <span class="pl-s1"><span class="pl-pds">"</span>setTimeout<span class="pl-pds">"</span></span>);
+      sinon.spy(subject, <span class="pl-s1"><span class="pl-pds">"</span>fetchItems<span class="pl-pds">"</span></span>);
+      subject.queueRequest();
+    });
+
+    afterEach(<span class="pl-st">function</span>() {
+      setTimeout.restore();
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>queues a fetch items request<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.queuedRequest).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>number<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>fetches the items after the throttle delay<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(setTimeout).to.have.been.called;
+
+      <span class="pl-s">var</span> args <span class="pl-k">=</span> _.first(setTimeout.args);
+      <span class="pl-s">var</span> callback <span class="pl-k">=</span> _.first(args);
+      <span class="pl-s">var</span> throttleDelay <span class="pl-k">=</span> _.last(args);
+      callback();
+      expect(subject.fetchItems).to.have.been.called;
+      expect(throttleDelay).to.equal(subject.throttleDelay);
+    });
+  });
+});</pre></div>
+
+<p>With a sturdy test harness underneath us we can confidently implement this adapter:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">AutocompleteAjaxAdapter</span>(<span class="pl-vpf">attributes</span>) {
+  _.bindAll(<span class="pl-v">this</span>);
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+  _.defaults(attributes, {
+    <span class="pl-en">onAutocomplete</span>: <span class="pl-st">function</span>() {}
+  });
+
+  <span class="pl-k">if</span> (_.isUndefined(attributes.url)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>AutocompleteAjaxAdapter: url is undefined<span class="pl-pds">"</span></span>);
+  }
+
+  <span class="pl-v">this</span>.url <span class="pl-k">=</span> attributes.url;
+  <span class="pl-v">this</span>.onAutocomplete <span class="pl-k">=</span> attributes.onAutocomplete;
+  <span class="pl-v">this</span>.throttleDelay <span class="pl-k">=</span> <span class="pl-c1">250</span>;
+}
+
+_.merge(AutocompleteAjaxAdapter.<span class="pl-sc">prototype</span>, {
+
+  <span class="pl-en">handleTextEntry</span>: <span class="pl-st">function</span>(<span class="pl-vpf">text</span>) {
+    <span class="pl-v">this</span>.query <span class="pl-k">=</span> text;
+    <span class="pl-k">if</span> (<span class="pl-v">this</span>.queuedRequest) {
+      <span class="pl-s3">clearTimeout</span>(<span class="pl-v">this</span>.queuedRequest);
+    }
+    <span class="pl-k">if</span> (<span class="pl-k">!</span>text) {
+      <span class="pl-v">this</span>.onAutocomplete([]);
+      <span class="pl-k">return</span>;
+    }
+    <span class="pl-v">this</span>.queueRequest();
+  },
+
+  <span class="pl-en">fetchItems</span>: <span class="pl-st">function</span>() {
+    $.ajax({
+      url<span class="pl-k">:</span> <span class="pl-v">this</span>.url,
+      type<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>,
+      dataType<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>json<span class="pl-pds">"</span></span>,
+      data<span class="pl-k">:</span> { query<span class="pl-k">:</span> <span class="pl-v">this</span>.query }
+    })
+      .done(<span class="pl-v">this</span>.onAutocomplete);
+  },
+
+  <span class="pl-en">queueRequest</span>: <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> _this <span class="pl-k">=</span> <span class="pl-v">this</span>;
+    <span class="pl-v">this</span>.queuedRequest <span class="pl-k">=</span> <span class="pl-s3">setTimeout</span>(<span class="pl-st">function</span>() {
+      _this.fetchItems();
+    }, <span class="pl-v">this</span>.throttleDelay);
+  }
+
+});</pre></div>
+
+<h2>
+<a id="autocomplete" class="anchor" href="#autocomplete" aria-hidden="true"><span class="octicon octicon-link"></span></a>Autocomplete</h2>
+
+<p>All that's left is to create an object to wrangle all these pieces together:</p>
+
+<div class="highlight highlight-js"><pre>describe(<span class="pl-s1"><span class="pl-pds">"</span>Autocomplete<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-s">var</span> subject;
+  <span class="pl-s">var</span> items;
+  beforeEach(<span class="pl-st">function</span>() {
+    appendFixture(<span class="pl-s1"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span>, { id<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>autocomplete<span class="pl-pds">"</span></span>, type<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>, name<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>autocomplete<span class="pl-pds">"</span></span> });
+    items <span class="pl-k">=</span> [
+      { value<span class="pl-k">:</span> <span class="pl-c1">1</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 1<span class="pl-pds">"</span></span> },
+      { value<span class="pl-k">:</span> <span class="pl-c1">2</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 2<span class="pl-pds">"</span></span> },
+      { value<span class="pl-k">:</span> <span class="pl-c1">3</span>, text<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>Test item 3<span class="pl-pds">"</span></span> }
+    ];
+    subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Autocomplete</span>({ selector<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>#autocomplete<span class="pl-pds">"</span></span>, url<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> });
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>requires a selector<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(<span class="pl-st">function</span>() {
+      <span class="pl-k">new</span> <span class="pl-en">Autocomplete</span>;
+    }).to.throw(<span class="pl-s1"><span class="pl-pds">"</span>Autocomplete: selector is undefined<span class="pl-pds">"</span></span>);
+  });
+
+  it(<span class="pl-s1"><span class="pl-pds">"</span>requires a url or an items array<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    expect(<span class="pl-st">function</span>() {
+      <span class="pl-k">new</span> <span class="pl-en">Autocomplete</span>({ selector<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>#autocomplete<span class="pl-pds">"</span></span> });
+    }).to.throw(<span class="pl-s1"><span class="pl-pds">"</span>Autocomplete: items or url is undefined<span class="pl-pds">"</span></span>);
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>initialize<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>has a reference to the input<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$input).to.exist;
+      expect(subject.$input).to.have.<span class="pl-sc">id</span>(<span class="pl-s1"><span class="pl-pds">"</span>autocomplete<span class="pl-pds">"</span></span>);
+      expect(subject.$input[<span class="pl-c1">0</span>].<span class="pl-sc">tagName</span>).to.equal(<span class="pl-s1"><span class="pl-pds">"</span>INPUT<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>wraps the element in an .autocomplete-container<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.exist;
+      expect(subject.$el).to.have.class(<span class="pl-s1"><span class="pl-pds">"</span>autocomplete-container<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>hides the original input<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$input).not.to.be.visible;
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>creates a filter input<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+       <span class="pl-s">var</span> expectedName <span class="pl-k">=</span> subject.$input.attr(<span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>_autocomplete_input<span class="pl-pds">"</span></span>;
+      expect(subject.autocompleteInput).to.be.an.instanceof(AutocompleteInput);
+      expect(subject.autocompleteInput.<span class="pl-sc">name</span>).to.equal(expectedName);
+      expect(subject.autocompleteInput.<span class="pl-sc">value</span>).to.equal(subject.$input.val());
+      expect(subject.autocompleteInput.onTextEntry).to.equal(subject.adapter.handleTextEntry);
+      expect(subject.autocompleteInput.onCommandEntry).to.equal(subject.completionList.handleCommandEntry);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>creates a list for autocompleted items<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.completionList).to.be.an.instanceof(AutocompleteList);
+      expect(subject.completionList.onItemSelect).to.equal(subject.handleItemSelect);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>has a default onAutocomplete callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.onAutocomplete).to.be.a(<span class="pl-s1"><span class="pl-pds">"</span>function<span class="pl-pds">"</span></span>);
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>onAutocomplete callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>sets the onAutocomplete callback<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        <span class="pl-s">var</span> <span class="pl-en">callback</span> <span class="pl-k">=</span> <span class="pl-st">function</span>() {};
+        subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Autocomplete</span>({
+          selector<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>#autocomplete<span class="pl-pds">"</span></span>,
+          items<span class="pl-k">:</span> items,
+          onAutocomplete<span class="pl-k">:</span> callback
+        });
+
+        expect(subject.onAutocomplete).to.equal(callback);
+      });
+    });
+
+    describe(<span class="pl-s1"><span class="pl-pds">"</span>when items are passed<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      it(<span class="pl-s1"><span class="pl-pds">"</span>has a local adapter<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+        subject <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Autocomplete</span>({
+          selector<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>#autocomplete<span class="pl-pds">"</span></span>,
+          items<span class="pl-k">:</span> items
+        });
+        expect(subject.adapter).to.be.an.instanceof(AutocompleteLocalAdapter);
+      });
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#render<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    it(<span class="pl-s1"><span class="pl-pds">"</span>appends the autocomplete input to the element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.have.descendants(<span class="pl-s1"><span class="pl-pds">"</span>.autocomplete-input<span class="pl-pds">"</span></span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>appends the autocomplete list to the element<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$el).to.have.descendants(<span class="pl-s1"><span class="pl-pds">"</span>.autocomplete-list<span class="pl-pds">"</span></span>);
+    });
+  });
+
+  describe(<span class="pl-s1"><span class="pl-pds">"</span>#handleItemSelect<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+    <span class="pl-s">var</span> item;
+    beforeEach(<span class="pl-st">function</span>() {
+      sinon.spy(subject, <span class="pl-s1"><span class="pl-pds">"</span>onAutocomplete<span class="pl-pds">"</span></span>);
+      item <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteListItem</span>({ item<span class="pl-k">:</span> _.first(items) });
+      subject.handleItemSelect(item);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>sets the $input's value to the item's value<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.$input.val()).to.equal(item.<span class="pl-sc">value</span>.<span class="pl-s3">toString</span>());
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>displays the item's text in the autocomplete input<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.autocompleteInput.$el).to.have.<span class="pl-sc">value</span>(item.<span class="pl-sc">text</span>);
+    });
+
+    it(<span class="pl-s1"><span class="pl-pds">"</span>calls the onAutocomplete callback, passing it the selected item<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {
+      expect(subject.onAutocomplete).to.have.been.calledWith(item);
+    });
+  });
+});
+</pre></div>
+
+<p>And here's the implementation:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-st">function</span> <span class="pl-en">Autocomplete</span>(<span class="pl-vpf">attributes</span>) {
+  _.bindAll(<span class="pl-v">this</span>);
+  attributes <span class="pl-k">=</span> attributes <span class="pl-k">||</span> {};
+
+  <span class="pl-k">if</span> (_.isUndefined(attributes.selector)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>Autocomplete: selector is undefined<span class="pl-pds">"</span></span>);
+  }
+  <span class="pl-k">if</span> (_.isUndefined(attributes.items <span class="pl-k">||</span> attributes.url)) {
+    <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-en">Error</span>(<span class="pl-s1"><span class="pl-pds">"</span>Autocomplete: items or url is undefined<span class="pl-pds">"</span></span>);
+  }
+
+  <span class="pl-v">this</span>.initialize(attributes.selector, attributes.items <span class="pl-k">||</span> attributes.url, attributes.onAutocomplete);
+}
+
+_.merge(Autocomplete.<span class="pl-sc">prototype</span>, {
+
+  <span class="pl-en">initialize</span>: <span class="pl-st">function</span>(<span class="pl-vpf">selector</span>, <span class="pl-vpf">itemsOrUrl</span>, <span class="pl-vpf">onAutocomplete</span>) {
+    <span class="pl-v">this</span>.onAutocomplete <span class="pl-k">=</span> onAutocomplete <span class="pl-k">||</span> <span class="pl-st">function</span>() {};
+    <span class="pl-v">this</span>.setupInput(selector);
+    <span class="pl-v">this</span>.$el <span class="pl-k">=</span> <span class="pl-v">this</span>.$input.<span class="pl-sc">parent</span>();
+    <span class="pl-v">this</span>.completionList <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteList</span>({ onItemSelect<span class="pl-k">:</span> <span class="pl-v">this</span>.handleItemSelect });
+    <span class="pl-v">this</span>.createAdapter(itemsOrUrl);
+    <span class="pl-v">this</span>.autocompleteInput <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteInput</span>({
+      name<span class="pl-k">:</span> <span class="pl-v">this</span>.$input.attr(<span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>),
+      value<span class="pl-k">:</span> <span class="pl-v">this</span>.$input.val(),
+      onTextEntry<span class="pl-k">:</span> <span class="pl-v">this</span>.adapter.handleTextEntry,
+      onCommandEntry<span class="pl-k">:</span> <span class="pl-v">this</span>.completionList.handleCommandEntry
+    });
+    <span class="pl-v">this</span>.render();
+  },
+
+  <span class="pl-en">setupInput</span>: <span class="pl-st">function</span>(<span class="pl-vpf">selector</span>) {
+    <span class="pl-v">this</span>.$input <span class="pl-k">=</span> $(selector);
+    <span class="pl-v">this</span>.$input.wrap(<span class="pl-s1"><span class="pl-pds">"</span>&lt;div class='autocomplete-container' /&gt;<span class="pl-pds">"</span></span>);
+    <span class="pl-v">this</span>.$input.hide();
+  },
+
+  <span class="pl-en">createAdapter</span>: <span class="pl-st">function</span>(<span class="pl-vpf">itemsOrUrl</span>) {
+    <span class="pl-k">if</span> (_.isArray(itemsOrUrl)) {
+      <span class="pl-v">this</span>.adapter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteLocalAdapter</span>({
+        items<span class="pl-k">:</span> itemsOrUrl,
+        onAutocomplete<span class="pl-k">:</span> <span class="pl-v">this</span>.completionList.render
+      });
+    } <span class="pl-k">else</span> {
+      <span class="pl-v">this</span>.adapter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AutocompleteAjaxAdapter</span>({
+        url<span class="pl-k">:</span> itemsOrUrl,
+        onAutocomplete<span class="pl-k">:</span> <span class="pl-v">this</span>.completionList.render
+      });
+    }
+  },
+
+  <span class="pl-en">render</span>: <span class="pl-st">function</span>() {
+    <span class="pl-v">this</span>.$el.append(<span class="pl-v">this</span>.autocompleteInput.$el);
+    <span class="pl-v">this</span>.$el.append(<span class="pl-v">this</span>.completionList.$el);
+  },
+
+  <span class="pl-en">handleItemSelect</span>: <span class="pl-st">function</span>(<span class="pl-vpf">item</span>) {
+    <span class="pl-v">this</span>.$input.val(item.<span class="pl-sc">value</span>);
+    <span class="pl-v">this</span>.autocompleteInput.$el.val(item.<span class="pl-sc">text</span>);
+    <span class="pl-v">this</span>.onAutocomplete(item);
+  }
+
+});</pre></div>
+
+<p>That should complete our sweet Autocomplete widget :)</p>
         </section>
 
         <aside id="sidebar">
@@ -154,6 +1986,6 @@
       </div>
     </div>
 
-
+  
   </body>
 </html>
