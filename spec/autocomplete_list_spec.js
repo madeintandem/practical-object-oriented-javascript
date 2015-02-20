@@ -14,14 +14,14 @@ describe("AutocompleteList", function() {
     subject = new AutocompleteList({ onItemSelect: onItemSelectSpy });
   });
 
-  xit("has an element", function() {
+  it("has an element", function() {
     expect(subject.$el).to.exist;
     expect(subject.$el[0].tagName).to.equal("UL");
     expect(subject.$el).to.have.class("autocomplete-list");
     expect(subject.$el).to.have.class("hidden");
   });
 
-  xit("has an onItemSelect handler", function() {
+  it("has an onItemSelect handler", function() {
     expect(subject.onItemSelect).to.equal(onItemSelectSpy);
   });
 
@@ -30,7 +30,7 @@ describe("AutocompleteList", function() {
       subject = new AutocompleteList();
     });
 
-    xit("has an onItemSelect handler", function() {
+    it("has an onItemSelect handler", function() {
       expect(subject.onItemSelect).to.be.a("function");
     });
   });
@@ -40,7 +40,7 @@ describe("AutocompleteList", function() {
       subject.render(items);
     });
 
-    xit("creates an completionListItem for each item", function() {
+    it("creates an completionListItem for each item", function() {
       expect(subject.items).to.be.an("Array");
       expect(subject.items.length).to.equal(items.length);
       _.each(subject.items, function(item) {
@@ -48,15 +48,15 @@ describe("AutocompleteList", function() {
       });
     });
 
-    xit("appends each item to the element", function() {
+    it("appends each item to the element", function() {
       expect(subject.$el).to.have.descendants("li");
     });
 
-    xit("removes the hidden class", function() {
+    it("removes the hidden class", function() {
       expect(subject.$el).not.to.have.class("hidden");
     });
 
-    xit("does not double render the items", function() {
+    it("does not double render the items", function() {
       subject.render(items);
       expect(subject.$el.find("li").length).to.equal(items.length);
     });
@@ -67,12 +67,12 @@ describe("AutocompleteList", function() {
         subject.$el.empty();
       });
 
-      xit("it adds the hidden class", function() {
+      it("it adds the hidden class", function() {
         subject.render([]);
         expect(subject.$el).to.have.class("hidden");
       });
 
-      xit("does not throw an error when items are undefined", function() {
+      it("does not throw an error when items are undefined", function() {
         expect(function() {
           subject.render();
         }).not.to.throw();
@@ -81,7 +81,7 @@ describe("AutocompleteList", function() {
   });
 
   describe("#hide", function() {
-    xit("adds the hidden class to the element", function() {
+    it("adds the hidden class to the element", function() {
       subject.$el.removeClass("hidden");
       subject.hide();
       expect(subject.$el).to.have.class("hidden");
@@ -89,7 +89,7 @@ describe("AutocompleteList", function() {
   });
 
   describe("#show", function() {
-    xit("removes the hidden class from the element", function() {
+    it("removes the hidden class from the element", function() {
       subject.$el.addClass("hidden");
       subject.show();
       expect(subject.$el).not.to.have.class("hidden");
@@ -105,11 +105,11 @@ describe("AutocompleteList", function() {
       subject.handleItemSelect(selectedItem);
     });
 
-    xit("calls the onItemSelect callback, passing the item clicked", function() {
+    it("calls the onItemSelect callback, passing the item clicked", function() {
       expect(subject.onItemSelect).to.have.been.calledWith(selectedItem);
     });
 
-    xit("hides the completion list", function() {
+    it("hides the completion list", function() {
       expect(subject.$el).to.have.class("hidden");
     });
   });
@@ -119,11 +119,11 @@ describe("AutocompleteList", function() {
       subject.createListItems(items);
     });
 
-    xit("returns undefined when no item is active", function() {
+    it("returns undefined when no item is active", function() {
       expect(subject.activeItem()).to.be.undefined;
     });
 
-    xit("returns the active item when one is active", function() {
+    it("returns the active item when one is active", function() {
       var activeItem = _.first(subject.items);
       activeItem.activate();
       expect(subject.activeItem()).to.equal(activeItem);
@@ -136,7 +136,7 @@ describe("AutocompleteList", function() {
     });
 
     describe("when no items are active", function() {
-      xit("returns the first item", function() {
+      it("returns the first item", function() {
         expect(subject.nextItem()).to.equal(_.first(subject.items));
       });
     });
@@ -146,13 +146,13 @@ describe("AutocompleteList", function() {
         _.first(subject.items).activate();
       });
 
-      xit("returns the next item in the items array", function() {
+      it("returns the next item in the items array", function() {
         expect(subject.nextItem()).to.equal(subject.items[1]);
       });
     });
 
     describe("when the last item is already active", function() {
-      xit("returns the first item", function() {
+      it("returns the first item", function() {
         _.last(subject.items).activate();
         expect(subject.nextItem()).to.equal(_.first(subject.items));
       });
@@ -165,7 +165,7 @@ describe("AutocompleteList", function() {
     });
 
     describe("when no items are active", function() {
-      xit("activates the first item", function() {
+      it("activates the first item", function() {
         subject.activateNextItem();
         expect(_.first(subject.items).active).to.be.true;
       });
@@ -177,17 +177,17 @@ describe("AutocompleteList", function() {
         subject.activateNextItem();
       });
 
-      xit("activates the next item in the items array", function() {
+      it("activates the next item in the items array", function() {
         expect(subject.items[1].active).to.be.true;
       });
 
-      xit("deactivates the previously active item", function() {
+      it("deactivates the previously active item", function() {
         expect(_.first(subject.items).active).to.be.false;
       });
     });
 
     describe("when the last item is already active", function() {
-      xit("activates the first item", function() {
+      it("activates the first item", function() {
         _.last(subject.items).activate();
         subject.activateNextItem();
         expect(_.first(subject.items).active).to.be.true;
@@ -201,7 +201,7 @@ describe("AutocompleteList", function() {
     });
 
     describe("when no items are active", function() {
-      xit("returns the last item", function() {
+      it("returns the last item", function() {
         expect(subject.previousItem()).to.equal(_.last(subject.items));
       });
     });
@@ -211,13 +211,13 @@ describe("AutocompleteList", function() {
         _.last(subject.items).activate();
       });
 
-      xit("returns the next item in the items array", function() {
+      it("returns the next item in the items array", function() {
         expect(subject.previousItem()).to.equal(subject.items[1]);
       });
     });
 
     describe("when the first item is already active", function() {
-      xit("returns the last item", function() {
+      it("returns the last item", function() {
         _.first(subject.items).activate();
         expect(subject.previousItem()).to.equal(_.last(subject.items));
       });
@@ -230,7 +230,7 @@ describe("AutocompleteList", function() {
     });
 
     describe("when no items are active", function() {
-      xit("activates the last item", function() {
+      it("activates the last item", function() {
         subject.activatePreviousItem();
         expect(_.last(subject.items).active).to.be.true;
       });
@@ -242,17 +242,17 @@ describe("AutocompleteList", function() {
         subject.activatePreviousItem();
       });
 
-      xit("activates the previous item in the items array", function() {
+      it("activates the previous item in the items array", function() {
         expect(subject.items[1].active).to.be.true;
       });
 
-      xit("deactivates the previously active item", function() {
+      it("deactivates the previously active item", function() {
         expect(_.last(subject.items).active).to.be.false;
       });
     });
 
     describe("when the first item is already active", function() {
-      xit("activates the last item", function() {
+      it("activates the last item", function() {
         _.first(subject.items).activate();
         subject.activatePreviousItem();
         expect(_.last(subject.items).active).to.be.true;
@@ -273,7 +273,7 @@ describe("AutocompleteList", function() {
         subject.handleCommandEntry("up");
       });
 
-      xit("handles up", function() {
+      it("handles up", function() {
         expect(subject.handleUp).to.have.been.called;
         expect(subject.handleDown).to.not.have.been.called;
         expect(subject.handleEnter).to.not.have.been.called;
@@ -286,7 +286,7 @@ describe("AutocompleteList", function() {
         subject.handleCommandEntry("down");
       });
 
-      xit("handles down", function() {
+      it("handles down", function() {
         expect(subject.handleDown).to.have.been.called;
         expect(subject.handleUp).to.not.have.been.called;
         expect(subject.handleEnter).to.not.have.been.called;
@@ -299,7 +299,7 @@ describe("AutocompleteList", function() {
         subject.handleCommandEntry("enter");
       });
 
-      xit("handles enter", function() {
+      it("handles enter", function() {
         expect(subject.handleEnter).to.have.been.called;
         expect(subject.handleUp).to.not.have.been.called;
         expect(subject.handleDown).to.not.have.been.called;
@@ -312,7 +312,7 @@ describe("AutocompleteList", function() {
         subject.handleCommandEntry("escape");
       });
 
-      xit("handles escape", function() {
+      it("handles escape", function() {
         expect(subject.handleEscape).to.have.been.called;
         expect(subject.handleUp).to.not.have.been.called;
         expect(subject.handleDown).to.not.have.been.called;
@@ -328,7 +328,7 @@ describe("AutocompleteList", function() {
       subject.handleDown();
     });
 
-    xit("activates the next item", function() {
+    it("activates the next item", function() {
       expect(subject.activateNextItem).to.have.been.called;
     });
   });
@@ -340,7 +340,7 @@ describe("AutocompleteList", function() {
       subject.handleUp();
     });
 
-    xit("activates the previous item", function() {
+    it("activates the previous item", function() {
       expect(subject.activatePreviousItem).to.have.been.called;
     });
   });
@@ -351,7 +351,7 @@ describe("AutocompleteList", function() {
       subject.handleEscape();
     });
 
-    xit("hides the list", function() {
+    it("hides the list", function() {
       expect(subject.hide).to.have.been.called;
     });
   });
@@ -367,13 +367,13 @@ describe("AutocompleteList", function() {
         subject.handleEnter();
       });
 
-      xit("selects the active item", function() {
+      it("selects the active item", function() {
         expect(item.select).to.have.been.called;
       });
     });
 
     describe("when there is no active item", function() {
-      xit("does not throw an error", function() {
+      it("does not throw an error", function() {
         expect(function() {
           subject.handleEnter();
         }).not.to.throw();
