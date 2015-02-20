@@ -1,4 +1,8 @@
- .autocomplete-container {
+h2 {
+  clear: both;
+}
+
+.autocomplete-container {
   float: left;
   overflow: auto;
   zoom: 1;

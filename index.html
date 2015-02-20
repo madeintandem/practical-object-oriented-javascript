@@ -14,10 +14,43 @@
     <h2>Local Autocomplete</h2>
     <input type="text" name="local_autocomplete" id="local-autocomplete-field" />
 
+    <br />
+
     <h2>AJAX Autocomplete</h2>
     <input type="text" name="ajax_autocomplete" id="ajax-autocomplete-field" />
 
     <script src="/js/vendor/jquery.min.js"></script>
     <script src="/js/vendor/lodash.min.js"></script>
+
+    <script src="/js/autocomplete_input.js"></script>
+    <script src="/js/autocomplete_list_item.js"></script>
+    <script src="/js/autocomplete_list.js"></script>
+    <script src="/js/autocomplete_local_adapter.js"></script>
+    <script src="/js/autocomplete_ajax_adapter.js"></script>
+    <script src="/js/autocomplete.js"></script>
+
+    <script type="text/javascript">
+      var localAutocompleteInstance = new Autocomplete({
+        selector: "#local-autocomplete-field",
+        items: [
+          { value: 1, text: "Apples" },
+          { value: 2, text: "Bananas" },
+          { value: 3, text: "Carrots" },
+          { value: 4, text: "Capers" },
+          { value: 5, text: "Corn" }
+        ],
+        onAutocomplete: function(item) {
+          console.log(item);
+        }
+      });
+
+      var ajaxAutocompleteInstance = new Autocomplete({
+        selector: "#ajax-autocomplete-field",
+        url: "fruits",
+        onAutocomplete: function(item) {
+          console.log(item);
+        }
+      });
+    </script>
   </body>
 </html>
