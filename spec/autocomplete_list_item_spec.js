@@ -17,31 +17,31 @@ describe("AutocompleteListItem", function() {
     });
   });
 
-  xit("has an element", function() {
+  it("has an element", function() {
     expect(subject.$el).to.exist;
     expect(subject.$el).to.have.class("autocomplete-list-item");
     expect(subject.$el[0].tagName).to.equal("LI");
   });
 
-  xit("has a value", function() {
+  it("has a value", function() {
     expect(subject.value).to.equal(testValue);
   });
 
-  xit("has text", function() {
+  it("has text", function() {
     expect(subject.text).to.equal(testText);
   });
 
-  xit("has a template", function() {
+  it("has a template", function() {
     expect(subject.template).to.be.a("function");
     var renderedTemplate = subject.template({ text: "foo" });
     expect(renderedTemplate).to.match(/foo/);
   });
 
-  xit("has an onSelect handler", function() {
+  it("has an onSelect handler", function() {
     expect(subject.onSelect).to.be.a("function");
   });
 
-  xit("has a active state", function() {
+  it("has a active state", function() {
     expect(subject.active).to.be.false;
   });
 
@@ -50,11 +50,11 @@ describe("AutocompleteListItem", function() {
       subject.activate();
     });
 
-    xit("sets active to true", function() {
+    it("sets active to true", function() {
       expect(subject.active).to.be.true;
     });
 
-    xit("adds the active class to el", function() {
+    it("adds the active class to el", function() {
       expect(subject.$el).to.have.class("active");
     });
   });
@@ -66,24 +66,24 @@ describe("AutocompleteListItem", function() {
       subject.deactivate();
     });
 
-    xit("sets active to false", function() {
+    it("sets active to false", function() {
       expect(subject.active).to.be.false;
     });
 
-    xit("removes the active class from el", function() {
+    it("removes the active class from el", function() {
       expect(subject.$el).to.not.have.class("active");
     });
   });
 
   describe("#select", function() {
-    xit("calls the onSelect function, passing itself", function() {
+    it("calls the onSelect function, passing itself", function() {
       subject.select();
       expect(subject.onSelect).to.have.been.calledWith(subject);
     });
   });
 
   describe("#registerEvents", function() {
-    xit("handles click", function() {
+    it("handles click", function() {
       subject.$el.trigger("click");
       expect(subject.onSelect).to.have.been.called;
     });
