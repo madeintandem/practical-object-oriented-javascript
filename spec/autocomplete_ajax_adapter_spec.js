@@ -16,21 +16,21 @@ describe("AutocompleteAjaxAdapter", function() {
     });
   });
 
-  xit("requires a url", function() {
+  it("requires a url", function() {
     expect(function() {
       new AutocompleteAjaxAdapter;
     }).to.throw("AutocompleteAjaxAdapter: url is undefined");
   });
 
-  xit("has a url", function() {
+  it("has a url", function() {
     expect(subject.url).to.equal("test");
   });
 
-  xit("has an onAutocomplete handler", function() {
+  it("has an onAutocomplete handler", function() {
     expect(subject.onAutocomplete).to.equal(onAutocompleteSpy);
   });
 
-  xit("has a throttle delay", function() {
+  it("has a throttle delay", function() {
     expect(subject.throttleDelay).to.be.a("number");
   });
 
@@ -41,7 +41,7 @@ describe("AutocompleteAjaxAdapter", function() {
       });
     });
 
-    xit("has a default onAutocomplete handler", function() {
+    it("has a default onAutocomplete handler", function() {
       expect(subject.onAutocomplete).to.be.a("function");
     });
   });
@@ -58,18 +58,18 @@ describe("AutocompleteAjaxAdapter", function() {
       clearTimeout.restore();
     });
 
-    xit("sets the query", function() {
+    it("sets the query", function() {
       subject.handleTextEntry(text);
       expect(subject.query).to.equal(text);
     });
 
-    xit("queues a request", function() {
+    it("queues a request", function() {
       subject.handleTextEntry(text);
       expect(subject.queueRequest).to.have.been.called;
     });
 
     describe("when there's a queued request", function() {
-      xit("clears the timeout", function() {
+      it("clears the timeout", function() {
         subject.queuedRequest = 5;
         subject.handleTextEntry(text);
         expect(clearTimeout).to.have.been.calledWith(5);
@@ -77,25 +77,25 @@ describe("AutocompleteAjaxAdapter", function() {
     });
 
     describe("when there is not a queued request", function() {
-      xit("does nothing", function() {
+      it("does nothing", function() {
         subject.handleTextEntry(text);
         expect(clearTimeout).not.to.have.been.called;
       });
     });
 
     describe("when the text is empty", function() {
-      xit("does not queue a request", function() {
+      it("does not queue a request", function() {
         subject.handleTextEntry("");
         expect(subject.queuedRequest).to.be.undefined;
       });
 
-      xit("clears a request out", function() {
+      it("clears a request out", function() {
         subject.queuedRequest = 15;
         subject.handleTextEntry("");
         expect(clearTimeout).to.have.been.calledWith(subject.queuedRequest);
       });
 
-      xit("sends an empty array to the on autocomplete callback", function() {
+      it("sends an empty array to the on autocomplete callback", function() {
         subject.handleTextEntry("");
         expect(subject.onAutocomplete).to.have.been.calledWith([]);
       });
@@ -103,7 +103,7 @@ describe("AutocompleteAjaxAdapter", function() {
   });
 
   describe("#fetchItems", function() {
-    xit("gets the items via ajax", function() {
+    it("gets the items via ajax", function() {
       subject.fetchItems();
       var request = _.last(requests);
       expect(request.url).to.equal(subject.url);
@@ -124,11 +124,11 @@ describe("AutocompleteAjaxAdapter", function() {
       setTimeout.restore();
     });
 
-    xit("queues a fetch items request", function() {
+    it("queues a fetch items request", function() {
       expect(subject.queuedRequest).to.be.a("number");
     });
 
-    xit("fetches the items after the throttle delay", function() {
+    it("fetches the items after the throttle delay", function() {
       expect(setTimeout).to.have.been.called;
 
       var args = _.first(setTimeout.args);
