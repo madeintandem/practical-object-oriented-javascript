@@ -15,13 +15,13 @@ describe("AutocompleteLocalAdapter", function() {
     });
   });
 
-  xit("requires items", function() {
+  it("requires items", function() {
     expect(function() {
       new AutocompleteLocalAdapter;
     }).to.throw("AutocompleteLocalAdapter: items is undefined");
   });
 
-  xit("has an onAutocomplete callback", function() {
+  it("has an onAutocomplete callback", function() {
     expect(subject.onAutocomplete).to.equal(onAutocompleteSpy);
   });
 
@@ -32,14 +32,14 @@ describe("AutocompleteLocalAdapter", function() {
       });
     });
 
-    xit("has a default onAutocomplete handler", function() {
+    it("has a default onAutocomplete handler", function() {
       expect(subject.onAutocomplete).to.be.a("function");
     });
   });
 
   describe("#handleTextEntry", function() {
     describe("when empty text is passed", function() {
-      xit("calls the onAutocomplete callback, passing an empty array of items", function() {
+      it("calls the onAutocomplete callback, passing an empty array of items", function() {
         subject.handleTextEntry("");
         expect(subject.onAutocomplete).to.have.been.calledWith([]);
       });
@@ -50,7 +50,7 @@ describe("AutocompleteLocalAdapter", function() {
         subject.handleTextEntry("Test item 3");
       });
 
-      xit("calls the onAutocomplete callback, passing an array of matching items", function() {
+      it("calls the onAutocomplete callback, passing an array of matching items", function() {
         expect(subject.onAutocomplete).to.have.been.calledWith([_.last(items)]);
       });
     });
