@@ -3,7 +3,9 @@ var app = express();
 var _ = require("lodash");
 var url = require('url');
 var port = process.env.PORT || 3000;
+
 app.use(express.static("."));
+
 app.get("/fruits", function (req, res) {
   var parsedUrl = url.parse(req.url, true);
   var params = parsedUrl.query;
@@ -12,7 +14,7 @@ app.get("/fruits", function (req, res) {
     var pattern = new RegExp("^" + params.query, "i");
     return !!fruit.text.match(pattern);
   });
-  res.send(filteredFruits);
+  res.send(req.params);
 });
 app.listen(port);
 console.log("Server started at: " + "http://localhost:".concat(port));

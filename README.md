@@ -228,7 +228,7 @@ Person.prototype.sayHello = function() {
   console.log("Hi, my name is " + this.firstName + ". I live in " + this.address.city + ", " + this.address.state + " on " + this.address.street + ".");
 };
 
-var bob = Person({
+var bob = new Person({
   firstName: "Bob",
   lastName: "Ject",
   age: 33,
@@ -241,7 +241,7 @@ var bob = Person({
   }
 );
 
-var ella = Person({
+var ella = new Person({
   firstName: "Ella",
   lastName: "Siff",
   age: 1,
@@ -295,7 +295,7 @@ Person.prototype.sayHello = function() {
   console.log("Hi, my name is " + this.firstName + ". I live in " + this.address.city + ", " + this.address.state + " on " + this.address.street + ".");
 };
 
-var bob = Person({
+var bob = new Person({
   firstName: "Bob",
   lastName: "Ject",
   age: 33,
@@ -308,7 +308,7 @@ var bob = Person({
   }
 );
 
-var ella = Person({
+var ella = new Person({
   firstName: "Ella",
   lastName: "Siff",
   age: 1,
@@ -522,7 +522,7 @@ function AutocompleteInput(attributes) {
 
   attributes = attributes || {};
 
-  if (_.isUndefined(this.attributes.name)) {
+  if (_.isUndefined(attributes.name)) {
     throw new Error("AutocompleteInput: name is undefined");
   }
 
@@ -830,9 +830,9 @@ _.merge(AutocompleteInput.prototype, {
   handleKeyup: function(evnt) {
     if (this.isCommandKey(evnt.keyCode)) {
       var command = AutocompleteInput.CMD_KEYCODES[evnt.keyCode];
-      this.attributes.onCommandEntry(command);
+      attributes.onCommandEntry(command);
     } else {
-      this.attributes.onTextEntry(this.$el.val());
+      attributes.onTextEntry(this.$el.val());
     }
   }
 });
