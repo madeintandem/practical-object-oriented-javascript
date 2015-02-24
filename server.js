@@ -14,7 +14,7 @@ app.get("/fruits", function (req, res) {
     var pattern = new RegExp("^" + params.query, "i");
     return !!fruit.text.match(pattern);
   });
-  res.send(req.params);
+  res.send(filteredFruits);
 });
 app.listen(port);
 console.log("Server started at: " + "http://localhost:".concat(port));
