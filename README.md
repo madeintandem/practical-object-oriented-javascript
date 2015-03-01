@@ -29,20 +29,6 @@ First Class Functions
 Function Assignment
 
 ```js
-var greeterCreator = function(greeting) {
-    return function(name) {
-        console.log(greeting + " " + name);
-    };
-};
-
-var helloGreeter = greeterCreator("Hello");
-
-helloGreeter("Chicago Web Conf");
-```
-
-Dynamic Function Assignment
-
-```js
 var myFunction = function() {
   console.log("Hello World");
 };
@@ -55,6 +41,20 @@ var myObject = {
 
 myFunction();
 myObject.myMethod();
+```
+
+Dynamic Function Assignment
+
+```js
+var greeterCreator = function(greeting) {
+    return function(name) {
+        console.log(greeting + " " + name);
+    };
+};
+
+var helloGreeter = greeterCreator("Hello");
+
+helloGreeter("Chicago Web Conf");
 ```
 
 ![Obligatory Mind Blown .gif](https://raw.githubusercontent.com/devmynd/practical-object-oriented-javascript/master/images/mind-blown.gif)
