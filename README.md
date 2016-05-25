@@ -84,7 +84,7 @@ logFoo(); // 15, 20
 
 console.log("global scope (window)")
 console.log(foo, bar); // 15, 10
-console.log(window.foo, window.bar); // 15, 10
+console.log(window.foo, window.bar); // 15, undefined
 ```
 
 ### Closures
