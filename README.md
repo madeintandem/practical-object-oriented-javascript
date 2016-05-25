@@ -179,7 +179,7 @@ var bob = new Person({
     city: "Browser Town",
     state: "Mozilla"
   }
-);
+});
 ```
 
 *Warning if you do not use the `new` keyword when you instantiate a new object, the function will still be executed, returning undefined and leaking any properties assigned to the global scope*:
@@ -203,7 +203,7 @@ var bob = Person({
     city: "Browser Town",
     state: "Mozilla"
   }
-);
+});
 
 console.log(bob); // undefined
 console.log(window.firstName); // "Bob"
@@ -239,7 +239,7 @@ var bob = new Person({
     city: "Browser Town",
     state: "Mozilla"
   }
-);
+});
 
 var ella = new Person({
   firstName: "Ella",
@@ -252,7 +252,7 @@ var ella = new Person({
     city: "Tab City",
     state: "Webkitesota"
   }
-);
+});
 
 bob.sayHello(); // "Hi, my name is Bob. I live in Browser Town, Mozilla on 123 Memory Ln."
 ella.sayHello(); // "Hi, my name is Ella. I live in Tab City, Webkitesota on 8362 Ram Rd."
